@@ -1,0 +1,65 @@
+Observaciones
+
+1. El logueo esta muy esta bien, solo que debe de quedar igual al que tenemos en ERP2, debe de aparecer arriba SINTEC PLUS y no debe de abarcar toda la pantalla, para poder observar sel fondo, cuando se habre en el cel se ve muy apretado, observa en tu cel los dos y veras, es una bobada, pero el cliente quiere eso.
+
+2. Te paso los iconos, debe de mostrarme solo los Iconos de los modulos de Maestro (Super administrador),Administracion,Bancos,Compras,Nomina,Thumano, VentasC (Ventas Corporativas) y VentasP (Ventas Pos), los otros los agregamos despues.
+
+3. El Modulo Maestro el Menu debe de Quedar
+   
+   Empresas
+   Usuarios
+   Maestros
+        ARL
+        EPS
+        EPP
+        PUC
+        GRUPOS
+        ELEMENTOS
+        TIPOS INGRESOS
+        TIPOS EGRESOS
+        TIPOS DE DOCUMENTOS
+        TIPOS ENFERMEDADES
+        PROFESIONES
+
+  Me haces este y me creas los otros solo el nombre, yo hago lo demas, me indicas la ruta, y yo los termino.
+
+4. Apenas este, tu me pasas las instrucciones para organizar los menus, y mientras tu le trabajas a la opcion de las empresas (crear, modificar,eliminar como estamos trabajndo en ERP2, con lista y los respectivos botones).
+
+5. La creacion de usuarios, igual, solo que debe de tener la opcion para agregarle los modulos a los cuales va tener acceso.
+
+  estas pantallas no tienen que quedar perfectas, solo funcionales.
+
+6. Cuanddo hallas hecho esto, yo ya tendre el menu de nomina y talento humano, alli debemos en talento humano crear los maestros para 
+   Tipos de Nomina
+   Centros de Trabajo
+   Cargos
+   y Empleados 
+
+   Estos los veras apenas yo cree el Menu.
+
+Eso debe de estar mañana antes de medio dia, yo quede reunirme con el a las 12 y mostrarle, en el trascurso de la tarde me consigna y yo te los trasfiero.
+
+Para la proxima semana la idea es:
+
+1. Terminar de Pulir la Plantilla.
+2. Crear todos los maestros del Modulo de Maestros tu creas uno y yo hago los demas 
+3. Terminar las Pantallas y Procesos de Talento Humamo.
+        Hoja de Vida   
+        Retiro de Empleado
+        Incapacidades
+        Suspenciones
+        Vacaciones
+        Eventos
+    Y lo que se vera apenas entre al modulo, yo te paso todas esas pantallas dibujadas el fin de semana.
+ 4. Yo trabajare en los maestros de los demas modulos. 
+
+        
+
+   
+
+
+        
+
+
+
+

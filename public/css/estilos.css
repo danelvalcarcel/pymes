@@ -1,0 +1,109 @@
+        #dataTable_filter { display: none !important }
+	    .div-link-home{font-size: 17px; margin-top: 10px}
+		/* Sticky footer styles
+		-------------------------------------------------- */
+		html {position: relative; min-height: 100%; }
+		body {font-size: 12px; /* Margin bottom by footer height */ margin-bottom: 60px; }
+		.footer {position: absolute; bottom: 0; width: 100%;
+		  /* Set the fixed height of the footer here */
+		  height: 60px; background-color: #f5f5f5;
+		}
+		/* Custom page CSS
+		-------------------------------------------------- */
+		/* Not required for template or sticky footer method. */
+		
+		body > .container { padding: 60px 15px 0; }
+		.container .text-muted { margin: 20px 0;}
+		.footer > .container {padding-right: 15px; padding-left: 15px;}
+		code {font-size: 80%;}	
+		
+		#formulario label, #formulario input, #formulario select{font-size: 13px}
+	    /* #formulario input[type="email"]*/
+		#formulario input{height: 28px !important}
+		#formulario .error{border: 1px solid red !important}
+		#formulario label{padding-top: 5px !important;}
+		#formulario select{padding: 5px 15px !important; height: 32px}	
+		.panel-default{margin: 2px; padding: 10px 0 10px 20px }
+		.listado a:hover{text-decoration: none !important }
+		.form-m{margin-bottom: 20px }
+		
+		/*==========================================*/
+		
+		.center-block {float: none; margin-left: auto; margin-right: auto}
+		.input-group .icon-addon .form-control {border-radius: 0}
+		.icon-addon {position: relative; color: #555;display: block}
+		.icon-addon:after,
+		.icon-addon:before {display: table; content: " " }
+		.icon-addon:after {clear: both }
+		.icon-addon.addon-md .glyphicon,
+		.icon-addon .glyphicon, 
+		.icon-addon.addon-md .fa,
+		.icon-addon .fa {position: absolute; z-index: 2; left: 10px; font-size: 14px; width: 20px; margin-left: -2.5px; text-align: center; padding: 10px 0; top: 1px}
+		.icon-addon.addon-lg .form-control {line-height: 1.33;height: 46px; font-size: 18px; padding: 10px 16px 10px 40px}
+		.icon-addon.addon-sm .form-control { height: 30px; padding: 5px 10px 5px 28px; font-size: 12px; line-height: 1.5}
+		.icon-addon.addon-lg .fa,
+		.icon-addon.addon-lg .glyphicon {font-size: 18px; margin-left: 0; left: 11px;top: 4px}
+		.icon-addon.addon-md .form-control,
+		.icon-addon .form-control {padding-left: 30px; float: left; font-weight: normal}
+		.icon-addon.addon-sm .fa,
+		.icon-addon.addon-sm .glyphicon {margin-left: 0; font-size: 12px; left: 5px; top: -1px}
+		.icon-addon .form-control:focus + .glyphicon,
+		.icon-addon:hover .glyphicon,
+		.icon-addon .form-control:focus + .fa,
+		.icon-addon:hover .fa {color: #2580db}
+		
+		.login {
+		  padding: 19px;
+		  background: rgba(0, 0, 0, 0.6);
+		  border: 1px solid #e3e3e3;
+		  border-radius: 4px;
+		  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+		}
+		
+		.login label {
+		    color: #fff;
+		}	
+		
+
+/*Support OC*/
+.support {
+	padding: 0 50px 50px 50px;
+}
+@media (min-width: 992px) {
+	.support {
+		padding: 0 100px 50px 100px;
+	}
+}
+.support p {
+	color: #fff;
+}
+.support a.icon {
+	margin: 50px auto 0 auto;
+	width: 100px;
+	height: 100px;
+	display: block;
+	border: 3px solid #0075B0;
+	webkit-border-radius: 50px;
+	border-radius: 50px;
+	color: #fff;
+	background: #0075B0;	
+}
+.support a.icon:hover {
+	border: 3px solid #23a1d1;
+	background: #23a1d1;
+}
+.support .icon i {
+	line-height: 100px;
+}
+
+.btn-send{width: 100%; margin: 10px 0 20px 0 }
+
+.btn-xs-min {
+  /* padding: 3px 10px; */
+  margin: 1px;
+  padding: 0 4px !important;
+  font-size: 10px !important;
+  line-height: 1.0 !important;
+ /*border-radius: 3px;*/
+}
