@@ -31,9 +31,9 @@
                                         <input id="consecutivo" style="padding: 0" type="text" disabled class="form-control" name="consecutivo" value="{{ old('consecutivo') }}" required autofocus>
 
                                     </div>
-                                    <label id="milabel" for="cedula" class="col-md-2 control-label">Documento</label>
+                                    <label id="milabel" for="cedula" class="col-md-3 control-label">Documento</label>
 
-                                    <div class="col-md-7">
+                                    <div class="col-md-6">
                                         <input id="cedula" type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" required autofocus>
                                         <input type="hidden" value="1" name="tipo_operacion" id="tipo_operacion">
                                     </div>

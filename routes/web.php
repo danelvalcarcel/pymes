@@ -36,7 +36,7 @@ Route::get('Clientes/{cedula}/{empresa}','ClienteController@show_fact_cli')->nam
 
 
 
-
+Route::get('Factura_pdf/{id}','FacturacionController@Factura_pdf')->name("Factura_pdf");
 Route::resource('Facturacion','FacturacionController');
 
 

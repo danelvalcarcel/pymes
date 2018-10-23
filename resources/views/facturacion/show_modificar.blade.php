@@ -25,8 +25,8 @@
                             <th style="background-color: #2d2d2d">Fecha</th>
                             <th style="background-color: #2d2d2d">Total</th>
                             <th style="background-color: #2d2d2d">Editar</th>
-                            <th style="background-color: #2d2d2d">Eliminar</th>
                             <th style="background-color: #2d2d2d">Imprimir</th>
+                            <th style="background-color: #2d2d2d">Eliminar</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,8 +37,9 @@
                                 <td>{{$operacione->created_at}}</td>
                                 <td>$ {{number_format($operacione->total,2)}}</td>
                                 <td><a href="{{Route("Facturacion.edit",["id"=>$operacione->id])}}">Editar</a></td>
+                                <td><a href="{{Route("Factura_pdf",["id"=>$operacione->id])}}">Imprimir</a></td>
                                 <td><a  href="">Eliminar</a></td>
-                                <td><a  href="">Imprimir</a></td>
+
                             </tr>
                         @endforeach
                         </tbody>

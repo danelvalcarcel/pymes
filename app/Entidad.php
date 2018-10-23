@@ -11,7 +11,9 @@ class Entidad extends Model
     protected $primaryKey = 'id_establecimiento';
     public $timestamps = false;
     protected $fillable = [
-       'documento', 'nombre', 'direccion', 'telefono', 'estado', 'isDeleted', 'createdBy', 'createdDtm', 'updatedby', 'updatedDtm',"celular","residencia_dian","regimen",
+       'documento', 'nombre', 'direccion', 'telefono', 'estado', 'isDeleted', 
+       'createdBy', 'createdDtm', 'updatedby', 'updatedDtm',"celular","residencia_dian",
+       "regimen","email",
        "doc_representante","id_erp","id_ciudad","nit","nombre_representante","idcajadecompensacion","logo"
     ];
 

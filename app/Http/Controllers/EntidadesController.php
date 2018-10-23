@@ -86,6 +86,7 @@ class EntidadesController extends Controller
           $elemento1->id_erp =$request['id_erp'];
           $elemento1->id_ciudad =$request['id_ciudad'];
           $elemento1->nit =$request['nit'];
+          $elemento1->email =$request['email'];
           $elemento1->updatedBy =Auth::id();
           $elemento1->updatedDtm =date('Y-m-d H:i:s');
           $elemento1->estado =$request["estado"];
@@ -137,6 +138,7 @@ class EntidadesController extends Controller
             'direccion'=>$request['direccion'],
             'telefono'=>$request['telefono'],
             'estado'=>$request['estado'],
+            'email'=>$request['email'],
             "doc_representante"=>$request['doc_representante'],
             "nombre_representante"=>$request['nombre_representante'],
             'isDeleted'=>0,
@@ -190,6 +192,7 @@ class EntidadesController extends Controller
           $elemento1->id_ciudad ="";
           $elemento1->estado ="";
           $elemento1->nit ="";
+          $elemento1->email ="";
           $elemento1->idcajadecompensacion="";
           $elemento1->nombre_representante="";
           $elemento1->cargo="";

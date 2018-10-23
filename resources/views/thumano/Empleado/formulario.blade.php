@@ -198,7 +198,7 @@
                        <label class="form-control" style="border:none" for="fecha_ingreso">Fecha Ingreso</label>
                     </div>
                     <div class="col-md-8">
-                        <input required class="form-control"  id="fecha_ingreso" type="date" name="fecha_ingreso"  value="{{$elemento->fecha_nacimiento}}"  >
+                        <input required class="form-control"  id="fecha_ingreso" type="date" name="fecha_ingreso"  value="{{$elemento->fecha_ingreso}}"  >
                     </div>
                 </div>
 
@@ -208,7 +208,7 @@
                        <label class="form-control" style="border:none" for="fecha_terminacion">Fecha Terminacion</label>
                     </div>
                     <div class="col-md-8">
-                        <input required class="form-control"  id="fecha_terminacion" type="date" name="fecha_terminacion"  value="{{$elemento->fecha_nacimiento}}"  >
+                        <input required class="form-control"  id="fecha_terminacion" type="date" name="fecha_terminacion"  value="{{$elemento->fecha_terminacion}}"  >
                     </div>
                 </div>
 
@@ -337,7 +337,7 @@
                                     <option value="3">Primaria Completa</option>
                                     <option value="4">Secundaria Incompleta</option>
                                     <option value="5">Secundaria completata</option>
-                                    <option value="6">Tecnica</option>
+                                    <option value="6">Técnica</option>
                                     <option value="7">Tegnologia</option>
                                     <option value="8">Otros Incompletos</option>
                                     <option value="9">Profesional</option>

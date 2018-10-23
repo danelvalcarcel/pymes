@@ -13,6 +13,7 @@ use App\Cupo;
 use App\Cuentas_pendiente;
 use App\Modulos;
 use App\User;
+use NumerosEnLetras;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 class FacturacionController extends Controller
 {
@@ -181,6 +182,25 @@ class FacturacionController extends Controller
     return view("facturacion.show_modificar",
       ["operaciones"=>$operacion, "user"=>$user,
       "nombre_modulo"=>$this->nombre_modulo, "title"=>"Facturacion","user"=>$user,"Modulos"=>$modulos,]);
+    }
+
+
+    public function Factura_pdf($id)
+    {
+        //
+        $operaciones = Operacione::find($id);
+
+      //
+        $letras_total="";
+        $letras_total=NumerosEnLetras::convertir($operaciones->total,'Pesos',false,'Centavos');
+        echo $letras_total;
+        //  echo json_encode($operaciones);
+         $user = User::find(Auth::user()->id_usuario);
+          $modulos = Modulos::all();
+        return view("facturacion.factura_pdf",["operacion"=>$operaciones,
+       "user"=>$user,"letras_total"=>$letras_total,
+      "nombre_modulo"=>$this->nombre_modulo, "title"=>"Facturacion","user"=>$user,"Modulos"=>$modulos]);
+
     }
 
     /**
