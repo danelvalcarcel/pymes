@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Maestros;
 
-use Illuminate\Http\Request;
 use App\User;
 use \stdClass;
 use App\Rol;
 use App\Modulos;
 use App\Entidad;
 use App\Arl;
+use App\Inventario;
+use App\Producto;
 use App\Maestros\Categoria;
 use App\Maestros\Medida;
 use App\Maestros\Articulo;
@@ -16,15 +17,49 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
-class ArticuloController extends Controller
+
+class MisArticuloController extends Controller
 {
    
 
 
-
-
      protected $nombre_modulo = "Maestros";
+
+
+
+      public function All_Articulo_Carga(Request $request)
+    {
+        //
+       
+        $Articulos="";
+        $Categorias=Categoria::all();
+        $modulos = Modulos::all();
+         $user = User::find(Auth::user()->id_usuario);
+        if($request["busquedad"]){
+            $Articulos = Articulo::where("nombre","=",$request["busquedad"])
+            ->where("isDeleted","<>",1)
+            ->where("tipo","=",1)
+            ->orWhere('nombre', 'like', '%' . $request["busquedad"] . '%')
+            ->where("isDeleted","<>",1)
+            ->where("tipo","=",1)
+            ->paginate(10);
+
+        }else{
+            $Articulos = Articulo::where("id_articulo",">",0)
+            ->where("isDeleted","<>",1)
+            ->where("tipo","=",1)
+            ->paginate(10);
+        }
+       
+         return view('maestro.MisArticulos.home_carga', array("Articulos"=>$Articulos,"title_menu"=>"Articulo",
+            "title"=>"Articulo","user"=>$user,"Modulos"=>$modulos,"Categorias"=>$Categorias,
+            "nombre_modulo"=>$this->nombre_modulo)); 
+    }
+
+
+
 
       public function All_Articulo(Request $request)
     {
@@ -37,20 +72,20 @@ class ArticuloController extends Controller
         if($request["busquedad"]){
             $Articulos = Articulo::where("nombre","=",$request["busquedad"])
             ->where("isDeleted","<>",1)
-             ->where("tipo","=",1)
+            ->where("tipo","=",2)
             ->orWhere('nombre', 'like', '%' . $request["busquedad"] . '%')
             ->where("isDeleted","<>",1)
-             ->where("tipo","=",1)
+            ->where("tipo","=",2)
             ->paginate(10);
 
         }else{
             $Articulos = Articulo::where("id_articulo",">",0)
             ->where("isDeleted","<>",1)
-             ->where("tipo","=",1)
+            ->where("tipo","=",2)
             ->paginate(10);
         }
        
-         return view('maestro.Articulos.home', array("Articulos"=>$Articulos,"title_menu"=>"Articulo",
+         return view('maestro.MisArticulos.home', array("Articulos"=>$Articulos,"title_menu"=>"Articulo",
             "title"=>"Articulo","user"=>$user,"Modulos"=>$modulos,"Categorias"=>$Categorias,
             "nombre_modulo"=>$this->nombre_modulo)); 
     }
@@ -76,12 +111,34 @@ class ArticuloController extends Controller
           $elemento1->id_medida =$request["id_medida"];
           $elemento1->valor_pormayor =$request["valor_pormayor"];
           $elemento1->valor_total =$request["valor_total"];
+          $elemento1->inicial =$request["inicial"];
           $elemento1->utilidad =$request["utilidad"];
            $elemento1->id_establecimiento=$user->id_establecimiento;
-           
- 			
           $elemento1->save();
-         return redirect('/All_Articulo')->with('status', "Elemento Actualizado Correctamente");
+          $prod = Producto::where("article_pyme","=",$request['id'])->get();
+           Producto::where("article_pyme","=",$request['id'])
+          ->update((["nombre"=>$request["nombre"],"codigo"=>$request["codigo"],
+          'categoria_id'=>$request["id_categoria"],
+          "tamanio"=>1,'medida_id'=>$request["id_medida"],
+                        "color"=>"Ninguno",
+                        "foto"=>"ninguna",
+                        "estado"=>"Activo",
+                        "descripcion"=>"Producto de Empresa",
+                        "precio_costo"=>$request["valor_costo"],
+                        "precio_venta"=>$request["valor_venta"],
+                        "estado_iva"=>"Activo",
+                        "sucursale_id"=>1,
+                        "empresa_id"=>1,
+                        "id_establecimiento"=>$user->id_establecimiento,
+                        "article_pyme"=>$request['id']]));
+
+          Inventario::where("producto_id","=",$prod[0]["id"])
+          ->update(["cantidad"=>$request["inicial"],'bodega_id'=>1,"estado"=>"Activo",
+            "sucursale_id"=>1,"empresa_id"=>1,"id_establecimiento"=>$user->id_establecimiento]);
+
+
+
+         return redirect('/All_MisArticulo')->with('status', "Elemento Actualizado Correctamente");
 
     }
 
@@ -97,7 +154,7 @@ class ArticuloController extends Controller
 
      	$fecha =date('Y-m-d');
        	$user = User::find(Auth::user()->id_usuario);
-         Articulo::create([
+         $articulo_creado =Articulo::create([
           'codigo'=>$request["codigo"],
            'nombre'=>$request["nombre"],
             'id_categoria'=>$request["id_categoria"],
@@ -115,13 +172,34 @@ class ArticuloController extends Controller
        			 'valor_descuento'=>$request["valor_descuento"],
        			  'id_medida'=>$request["id_medida"],
        			   'valor_pormayor'=>$request["valor_pormayor"],
-               "tipo"=>1,
+               "tipo"=>2,
+               "inicial"=>$request["inicial"],
                "utilidad"=>$request["utilidad"],
               "valor_total"=>$request["valor_total"],
            				'id_establecimiento'=>$user->id_establecimiento
         ]);
 
-        return redirect('/All_Articulo')->with('status', "Elemento Creado Correctamente");
+        $produc= Producto::create(["nombre"=>$request["nombre"],"codigo"=>$request["codigo"],
+          'categoria_id'=>$request["id_categoria"],
+          "tamanio"=>1,'medida_id'=>$request["id_medida"],
+                        "color"=>"Ninguno",
+                        "foto"=>"ninguna",
+                        "estado"=>"Activo",
+                        "descripcion"=>"Producto de Empresa",
+                        "precio_costo"=>$request["valor_costo"],
+                        "precio_venta"=>$request["valor_venta"],
+                        "estado_iva"=>"Activo",
+                        "sucursale_id"=>1,
+                        "empresa_id"=>1,
+                        "id_establecimiento"=>$user->id_establecimiento,
+                        "article_pyme"=>$articulo_creado->id_articulo]);
+
+          
+           Inventario::create(["codigo"=> $request["codigo"],
+            'producto_id'=>$produc->id,"cantidad"=>$request["inicial"],'bodega_id'=>1,"estado"=>"Activo",
+            "sucursale_id"=>1,"empresa_id"=>1,"id_establecimiento"=>$user->id_establecimiento]);
+
+        return redirect('/All_MisArticulo')->with('status', "Elemento Creado Correctamente");
     }
 
 
@@ -137,11 +215,12 @@ class ArticuloController extends Controller
            $estilo="";
         $elemento="";
         if($ruta=="actualizar"){
-          $ruta ="Articulo_update";
+          $ruta ="MisArticulo_update";
            $elemento =Articulo::find($id);
            $estilo="none";
         }else if($ruta=="crear"){
-          $ruta ="Articulo_create";
+
+          $ruta ="MisArticulo_create";
           $elemento1 = new stdClass();
           $elemento1->id_articulo = "";
           $elemento1->codigo = "";
@@ -163,14 +242,26 @@ class ArticuloController extends Controller
           $elemento1->id_establecimiento ="";
           $elemento1->valor_total ="";
           $elemento1->utilidad ="";
+          $elemento1->tipo ="";
+          $elemento1->inicial ="";
+          
           $elemento = $elemento1;
+                  	if($id != 0){
+        		$elemento =Articulo::find($id);
+        	}
+           
         }else{
-           $ruta ="All_Articulo";
+        	$ruta ="All_MisArticulo";
            $estilo="none";
            $elemento =Articulo::find($id);
+        		if($id != 0){
+        		$elemento =Articulo::find($id);
+        		$ruta ="All_MisArticulo_Carga";
+        	}
+           
         }
 
-      return view('maestro.Articulos.formulario', array('elemento' => $elemento,"id"=>$id,"ruta"=>$ruta,"user"=>$user,"Modulos"=>$modulos,
+      return view('maestro.MisArticulos.formulario', array('elemento' => $elemento,"id"=>$id,"ruta"=>$ruta,"user"=>$user,"Modulos"=>$modulos,
         "estilo"=>$estilo,"Medidas"=>$Medidas,"Categorias"=>$Categorias,
             "nombre_modulo"=>$this->nombre_modulo));
        
@@ -183,7 +274,9 @@ class ArticuloController extends Controller
       $elemento =Articulo::find($id);
       $elemento->isDeleted=1;
       $elemento->save();
-      return redirect('/All_Articulo')->with('status', "Elemento Eliminado Correctamente");
+      $producto = Producto::where("article_pyme","=",$id)->get();
+      Inventario::where("producto_id","=",$producto[0]["id"])->delete();
+      Producto::where("article_pyme","=",$id)->delete();
+      return redirect('/All_MisArticulo')->with('status', "Elemento Eliminado Correctamente");
     }
-
 }

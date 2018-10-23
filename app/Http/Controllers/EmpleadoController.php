@@ -226,7 +226,13 @@ class EmpleadoController extends Controller
             $elemento1->talla_pantalon=$request['talla_pantalon'];
             $elemento1->talla_zapatos=$request['talla_zapatos'];
             $elemento1->rh=$request['rh'];
-          
+            $elemento1->tipocontrato=$request['tipocontrato'];
+            $elemento1->tipodocumento=$request['tipodocumento'];
+             if($request["logo"]){
+            $storage_name =Storage::disk('public_incapacidades')->put('/',$request["logo"]);
+            $elemento1->logo=$storage_name;
+           }
+
           $elemento1->save();
           //Empleadosdocumentos
           //Empleadospersonas
@@ -276,6 +282,11 @@ class EmpleadoController extends Controller
 
 
         $user = User::find(Auth::user()->id_usuario);
+
+        $storage_name="";
+        if($request["logo"]){
+            $storage_name =Storage::disk('public_incapacidades')->put('/', $request["logo"]);
+           }
         $elemento1= Empleado::create([
             
             'contrato'=>$request['contrato'],
@@ -304,7 +315,10 @@ class EmpleadoController extends Controller
             "talla_camisa"=>$request['talla_camisa'],
             "talla_pantalon"=>$request['talla_pantalon'],
             "talla_zapatos"=>$request['talla_zapatos'],
-            "rh"=>$request['rh']
+            "rh"=>$request['rh'],
+            "tipocontrato"=>$request['tipocontrato'],
+            "tipodocumento"=>$request['tipodocumento'],
+             'logo'=>$storage_name
         ]);
 
           for($x=1; $x<6; $x=$x+1){
@@ -414,6 +428,10 @@ class EmpleadoController extends Controller
           $elemento1->talla_pantalon="";
           $elemento1->talla_zapatos="";
           $elemento1->rh="";
+          $elemento1->logo="";
+          $elemento1->tipocontrato="";
+          $elemento1->tipodocumento="";
+
 
           
           

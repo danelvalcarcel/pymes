@@ -53,6 +53,15 @@
                     </div>
                 </div>
 
+                                <div class="col-md-6" style="margin-top: 15px" >
+                    <div class="col-md-6">
+                       <label class="form-control" style="border:none" for="nombre">Numero Cuenta</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input required class="form-control" id="numero" type="text" name="numero" value="{{$elemento->numero}}" >
+                    </div>
+                </div>
+
                  <div class="col-md-6" style="margin-top: 20px">
                             <div class="col-md-6">
                             <label for="tipo"  class="col-md-4 form-control" style="border:none">Tipo</label>

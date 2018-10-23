@@ -11,7 +11,7 @@ class Cliente extends Model
     protected $table ="clientes";
     protected $fillable =['firts_name','last_name','email','cedula',"pais","departamento",
                         "municipio","direccion","tel_fijo","celular_1","celular_2","observacion","tipo_cliente_id",
-                        "sucursale_id","empresa_id","id_establecimiento"];
+                        "sucursale_id","empresa_id","id_establecimiento","mensualidad","tipodocumento","cupo","plazo"];
 
 
     public function user()

@@ -65,11 +65,11 @@ class FondoController extends Controller
            $elemento1->codigo =$request["codigo"];
           $elemento1->tipo =$request["tipo"];
           $elemento1->id_puc =$request["id_puc"];
-          $elemento1->porcentaje_descuento =$request["porcentaje_descuento"];
           $elemento1->updatedDtm =date('Y-m-d H:i:s');
           $elemento1->updatedby =$user->id_usuario;
           $elemento1->id_banco =$request["id_banco"];
           $elemento1->inicial =$request["inicial"];
+          $elemento1->numero =$request["numero"];
            $elemento1->id_establecimiento=$user->id_establecimiento;
            
  			
@@ -103,6 +103,7 @@ class FondoController extends Controller
                "inicial"=>$request["inicial"],
                "codigo"=>$request["codigo"],
               "id_puc"=>$request["id_puc"],
+              "numero"=>$request["numero"],
            				'id_establecimiento'=>$user->id_establecimiento
         ]);
 
@@ -151,6 +152,7 @@ class FondoController extends Controller
           $elemento1->id_establecimiento ="";
           $elemento1->id_puc ="";
           $elemento1->id_banco ="";
+          $elemento1->numero ="";
           $elemento = $elemento1;
         }else{
            $ruta ="All_Fondo";

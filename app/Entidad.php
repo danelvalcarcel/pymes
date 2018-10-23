@@ -12,7 +12,7 @@ class Entidad extends Model
     public $timestamps = false;
     protected $fillable = [
        'documento', 'nombre', 'direccion', 'telefono', 'estado', 'isDeleted', 'createdBy', 'createdDtm', 'updatedby', 'updatedDtm',"celular","residencia_dian","regimen",
-       "doc_representante","id_erp","id_ciudad","nit","nombre_representante"
+       "doc_representante","id_erp","id_ciudad","nit","nombre_representante","idcajadecompensacion","logo"
     ];
 
 

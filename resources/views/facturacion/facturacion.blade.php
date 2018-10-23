@@ -31,7 +31,7 @@
                                         <input id="consecutivo" style="padding: 0" type="text" disabled class="form-control" name="consecutivo" value="{{ old('consecutivo') }}" required autofocus>
 
                                     </div>
-                                    <label id="milabel" for="cedula" class="col-md-2 control-label">Cedula</label>
+                                    <label id="milabel" for="cedula" class="col-md-2 control-label">Documento</label>
 
                                     <div class="col-md-7">
                                         <input id="cedula" type="text" class="form-control" name="cedula" value="{{ old('cedula') }}" required autofocus>
@@ -42,7 +42,7 @@
                             <div class="col-md-6">
 
                                 <div id="btn_fact_prod" class="col-md-12">
-                                    <button type="button"  class="btn btn-primary col-md-6 col-md-offset-1" id="btn_agregar_prod" data-toggle="modal" data-target="#myModal">
+                                    <button style="display: none" type="button"  class="btn btn-primary col-md-6 col-md-offset-1" id="btn_agregar_prod" data-toggle="modal" data-target="#myModal">
                                         Agregar
                                     </button>
                                     <button type="button"    class="btn btn-primary col-md-5" id="btn_facturar" data-toggle="modal" data-target="#facturarModal">
@@ -73,6 +73,44 @@
                                 </textarea>
                             </div>
 
+                        </div>
+
+                        <div class="row">
+                            
+
+                                            <div class="modal-body">
+                   <div class="row " style=" border-radius: 5px; padding-bottom: 10px; padding-top: 10px">
+                       <div class="form-group">
+                             <div class="col-md-2">
+                              <label style="color: #fff !important">Buscar Productos</label>
+                           </div>
+                           <div class="col-md-6">
+                                    <input title="producto" type="text"  name="producto" value="" id="producto" class="form-control">
+
+                           </div>
+                        
+                       </div>
+
+
+                   </div>
+
+                    <div class="row" style="margin-top: 4px">
+                        <div  id="cont_prod_busc">
+                            <div class="row" id="cont_prod_busc_row">
+
+                                        <table  class=" col-md-12 table table-bordered  table-striped">
+
+
+
+                                        </table>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
                         </div>
 
 
@@ -220,138 +258,7 @@
                     <div class="row" style="margin-top: 4px">
                         <div  id="cont_prod_busc">
                             <div class="row" id="cont_prod_busc_row">
-                               <!-- <div class="col-md-3" >
-                                    <img class="col-md-12" height="150px" src="img/bombillo.jpg">
-                                    <div class="col-md-12" style="text-align: center">
-                                        <h4>Nombre del Producto</h4>
-                                        <div id="desc_prod1" class="desc_ocul" data-element ="1" style="text-align: justify; height: 60px; overflow: hidden; text-overflow: ellipsis">Esta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion deEsta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion de</div>
-                                        <div class="row" style="margin-top: 4px">
-                                            <p class="col-md-6"  ><strong>Ubicacion</strong></p>
-                                            <div class="col-md-6">
-                                                <p style="text-align: left">Bodega 2</p>
-                                            </div>
 
-                                        </div>
-
-                                        <div class="row">
-                                            <p class="col-md-6" style="padding: 6px 12px;" ><strong>15.000 und</strong></p>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" name="cantidad_prop">
-                                            </div>
-
-                                        </div>
-
-                                        <p><strong>$ 15.000</strong> </p>
-                                        <div class="row">
-                                            <button type="button"  class="btn btn-primary col-md-8 col-md-offset-2" id="btn_agregar_prod_conse">
-                                                Agregar
-                                            </button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-3" >
-                                    <img class="col-md-12" height="150px" src="img/bombillo.jpg">
-                                    <div class="col-md-12" style="text-align: center">
-                                        <h4>Nombre del Producto</h4>
-                                        <div id="desc_prod2" class="desc_ocul" data-element ="2" style="text-align: justify; height: 60px; overflow: hidden; text-overflow: ellipsis">Esta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion deEsta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion de</div>
-                                        <div class="row" style="margin-top: 4px">
-                                            <p class="col-md-6"  ><strong>Ubicacion</strong></p>
-                                            <div class="col-md-6">
-                                                <p style="text-align: left">Bodega 2</p>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <p class="col-md-6" style="padding: 6px 12px;" ><strong>15.000 und</strong></p>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" name="cantidad_prop">
-                                            </div>
-
-                                        </div>
-
-                                        <p><strong>$ 15.000</strong> </p>
-                                        <div class="row">
-                                            <button type="button"  class="btn btn-primary col-md-8 col-md-offset-2" id="btn_agregar_prod_conse">
-                                                Agregar
-                                            </button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-3" >
-                                    <img class="col-md-12" height="150px" src="img/bombillo.jpg">
-                                    <div class="col-md-12" style="text-align: center">
-                                        <h4>Nombre del Producto</h4>
-                                        <div id="desc_prod3" class="desc_ocul" data-element ="3" style="text-align: justify; height: 60px; overflow: hidden; text-overflow: ellipsis">Esta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion deEsta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion de</div>
-                                        <div class="row" style="margin-top: 4px">
-                                            <p class="col-md-6"  ><strong>Ubicacion</strong></p>
-                                            <div class="col-md-6">
-                                                <p style="text-align: left">Bodega 2</p>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <p class="col-md-6" style="padding: 6px 12px;" ><strong>15.000 und</strong></p>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" name="cantidad_prop">
-                                            </div>
-
-                                        </div>
-
-                                        <p><strong>$ 15.000</strong> </p>
-                                        <div class="row">
-                                            <button type="button"  class="btn btn-primary col-md-8 col-md-offset-2" id="btn_agregar_prod_conse">
-                                                Agregar
-                                            </button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-md-3" >
-                                    <img class="col-md-12" height="150px" src="img/bombillo.jpg">
-                                    <div class="col-md-12" style="text-align: center">
-                                        <h4>Nombre del Producto</h4>
-                                        <div id="desc_prod4" class="desc_ocul" data-element ="4" style="text-align: justify; height: 60px; overflow: hidden; text-overflow: ellipsis">Esta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion deEsta es la Descripcion del producto
-                                            Esta es la Descripcion deEsta es la Descripcion de</div>
-                                        <div class="row" style="margin-top: 4px">
-                                            <p class="col-md-6"  ><strong>Ubicacion</strong></p>
-                                            <div class="col-md-6">
-                                                <p style="text-align: left">Bodega 2</p>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <p class="col-md-6" style="padding: 6px 12px;" ><strong>15.000 und</strong></p>
-                                            <div class="col-md-6">
-                                                <input class="form-control" type="number" name="cantidad_prop">
-                                            </div>
-
-                                        </div>
-
-                                        <p><strong>$ 15.000</strong> </p>
-                                        <div class="row">
-                                            <button type="button"  class="btn btn-primary col-md-8 col-md-offset-2" id="btn_agregar_prod_conse">
-                                                Agregar
-                                            </button>
-                                        </div>
-                                    </div>
-
-
-                                </div>-->
                                         <table  class=" col-md-12 table table-bordered  table-striped">
 
 
@@ -567,6 +474,17 @@
             </div>
         </div>
     </div>
+    <style type="text/css" media="screen">
+    #cont_prod_busc a, #cont_prod_busc p, #cont_prod_busc td, #cont_prod_busc tr,
+    #cont_prod_busc h4, #cont_prod_busc h3, #cont_prod_busc h5, #cont_prod_busc strong{
+        color:#000 !important;
+        background: #fff;
+        padding: 0;
+    }    
+    #cont_prod_busc table tr td:nth-child(3),#cont_prod_busc table tr td:nth-child(1){
+        display: none;
+    }
+    </style>
 
 @endsection
 @section("script")
@@ -731,6 +649,9 @@
                 $("div#cont_prod_busc_row>table>tbody>tr#content_"+$("#codigo_"+producto+"").text()+" td").css("background","#dff0d8");
 
                 recalcular();
+                $("#cont_prod_busc_row > table").empty();
+                $("#producto").val("");
+                 $("#producto").focus();
             });
 
 
@@ -751,7 +672,7 @@
 
             $("#btn_facturar").on("click",function(e) {
                                 $("#opciones_caja_selec").attr("disabled","false")
-                $("#tipo_pago_selec").attr("disabled","false")
+               // $("#tipo_pago_selec").attr("disabled","false")
                 e.preventDefault();
                     var total = parseFloat($("#total_factura").text().replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", ""));
 
@@ -761,9 +682,9 @@
                     $("input#dinero_caja").val(parseFloat($("#total_factura").text().replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "")));
                     $("input#dinero_caja").text(parseFloat($("#total_factura").text().replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "")));
                 $("#dinero_caja").attr("dinero_caja",total);
-                $("#btn_agregar_caja").click();
+                //$("#btn_agregar_caja").click();
                 $("#opciones_caja_selec").attr("disabled","disabled")
-                $("#tipo_pago_selec").attr("disabled","disabled")
+                //$("#tipo_pago_selec").attr("disabled","disabled")
 
 
             });
@@ -935,7 +856,7 @@
                                 "</div>");
                             $("#inforModal").modal().appendTo("#facturarModal");
                             window.setTimeout(function(){
-                                location.reload();
+                                 location.href="{{Route('Facturacion.index')}}";
                             }, 1500);
                         }
                     }
@@ -983,13 +904,15 @@
 
 
             $("#cedula").keypress(function(e) {
+                e.preventDefault();
                 var cedula = $("#cedula").val();
                 if(e.which == 13) {
+
 
                     $.ajax({
                         type:"Get",
                         dataType:"json",
-                        url:"/Clientes"+"/"+ cedula+"/"+"{{ Auth::user()->id_establecimiento}}",
+                        url:"{{url('/')}}/Clientes"+"/"+ cedula+"/"+"{{ Auth::user()->id_establecimiento}}",
                         success: function(resp){
                             console.log(resp.length);
                             if(resp.length===0){
@@ -1027,7 +950,8 @@
                             $("#descripcion_cliente").append(agregar);
                             $("#cont_desc_cliente").slideDown(500);
                             $("#text_area_descri").slideDown(500);
-                            $("#btn_agregar_prod").focus().click();
+                            $("#producto").focus();
+                            //$("#btn_agregar_prod").focus().click();
 
                         }});
 
@@ -1068,7 +992,7 @@
                 $.ajax({
                     type:"Get",
                     dataType:"json",
-                    url:"/Productos"+"/"+ nombre+"/"+"ajax_prod",
+                    url:"{{url('/')}}/Productos"+"/"+ nombre+"/"+"ajax_prod",
                     success: function(resp){
                          lista_prod=[];
                          lista_prod_id=[];

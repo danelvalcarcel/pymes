@@ -7,10 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" type="text/css" href="/css/misestilos.css">
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css"">
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/')}}/css/misestilos.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/')}}/bootstrap/css/bootstrap.css"">
+    <link rel="stylesheet" type="text/css" href="{{url('/')}}/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/')}}/jquery-ui/jquery-ui.css">
 
 
     <title>LumenPos</title>
@@ -104,6 +104,26 @@
                                 </div>
 
                             </div>
+
+
+                         <div class="col-sm-6"  >
+
+                     <div class="col-md-3">
+                            <label for="tipocontrato"  class="col-md-4 form-control" style="border:none">Tipo de Documento</label>
+                             </div>
+
+                            <div class="col-md-9">
+                                <select class="form-control" id="tipodocumento" class="form-control" name="tipodocumento" >
+                                                    <option value="1">Cedula</option>
+                                                    <option value="2">Tarjeta de Identidad</option>
+                                                    <option value="3">Cedula de Extranjeria</option>
+                                                    <option value="4">Visa</option>
+                                                    <option value="5">Pasaporte</option>
+                                                    <option value="6">Nit</option>
+                                                 
+                                                </select>
+                            </div>
+                    </div>
                         </div>
 
                         <div class="row">
@@ -207,6 +227,29 @@
                         </div>
 
 
+                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('cupo') ? ' has-error' : '' }}">
+                                    <label  id="milabel" for="tel_fijo" class="col-md-5 control-label">Cupo</label>
+                                    <div class="col-md-7">
+                                        <input id="cupo" step="0.01" type="number" class="form-control" name="cupo" value="{{ old('cupo') }}" required>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('Plazo') ? ' has-error' : '' }}">
+                                    <label  id="milabel" for="observacion" class="col-md-3 control-label">Plazo</label>
+                                    <div class="col-md-9">
+                                        <input id="plazo" type="number" class="form-control" name="plazo" value="{{ old('plazo') }}" required>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
 
 
 
@@ -222,6 +265,16 @@
                                             <option value="3">Cliente Operador</option>
                                             <option value="4">Cliente Super Admin</option>
                                         </select>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                                                        <div class="col-md-6">
+                                <div class="form-group {{ $errors->has('mensualidad') ? ' has-error' : '' }}">
+                                    <label  id="milabel" for="mensualidad" class="col-md-3 control-label">Mensualidad</label>
+                                    <div class="col-md-9">
+                                        <input id="mensualidad" type="number" step="0.01" class="form-control" name="mensualidad" value="{{ old('mensualidad') }}" required>
                                     </div>
 
                                 </div>

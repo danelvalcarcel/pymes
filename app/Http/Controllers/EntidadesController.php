@@ -13,6 +13,7 @@ use App\CajaCompensacion;
 use App\Entidad;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class EntidadesController extends Controller
 {
@@ -90,6 +91,14 @@ class EntidadesController extends Controller
           $elemento1->estado =$request["estado"];
           $elemento1->nombre_representante=$request['nombre_representante'];
           $elemento1->cargo = $request['cargo'];
+          $elemento1->idcajadecompensacion=$request["idcajadecompensacion"];
+
+            if($request["logo"]){
+            $storage_name =Storage::disk('public_incapacidades')->put('/',$request["logo"]);
+            $elemento1->logo=$storage_name;
+           }
+
+
           $elemento1->save();
          return redirect('/All_Entidades')->with('status', "Usuario Actualizado Correctamente");
 
@@ -117,6 +126,10 @@ class EntidadesController extends Controller
              'id_erp'=> 'required|numeric|max:255',
              'id_ciudad'=> 'required|numeric|max:255',
     ]);
+        $storage_name="";
+        if($request["logo"]){
+            $storage_name =Storage::disk('public_incapacidades')->put('/', $request["logo"]);
+           }
        
          Entidad::create([
             'documento'=>$request['doc_representante'],
@@ -137,7 +150,10 @@ class EntidadesController extends Controller
             "id_erp"=>$request['id_erp'],
             "id_ciudad"=>$request['id_ciudad'],
             "nit"=>$request['nit'],
-            "cargo"=>$request['cargo']
+            "cargo"=>$request['cargo'],
+            "idcajadecompensacion"=>$request["idcajadecompensacion"],
+            'logo'=>$storage_name
+
         ]);
 
         return redirect('/All_Entidades')->with('status', "Entidad Creado Correctamente");
@@ -177,6 +193,7 @@ class EntidadesController extends Controller
           $elemento1->idcajadecompensacion="";
           $elemento1->nombre_representante="";
           $elemento1->cargo="";
+          $elemento1->logo="";
           $elemento = $elemento1;
         }else{
            $ruta ="All_Entidades";

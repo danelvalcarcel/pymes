@@ -24,6 +24,12 @@
                 @endif
 
                 <div class="panel-body">
+                                       <div class="col-md-12" style="text-align: center;" >
+                   @if($elemento->logo != "")
+                  <img src="{{url('/uploads/load_files_incapacidades/'.$elemento->logo)}}" alt="Avatar" class="avatar">
+                @endif
+                   
+                </div>
             <form id="form_sueldo" enctype="multipart/form-data" action="{{ route($ruta)}}" method="post">
                  {{ csrf_field() }}
                 <div class="row">
@@ -48,6 +54,22 @@
                         <input required class="form-control" id="documento" type="number" name="documento" value="{{$elemento->documento}}" >
                     </div>
                 </div>
+
+                   <div class="col-sm-6"  style="margin-top: 20px">
+
+                     <div class="col-md-4">
+                            <label for="tipocontrato"  class="col-md-4 form-control" style="border:none">Tipo de Documento</label>
+                             </div>
+
+                            <div class="col-md-8">
+                                <select class="form-control" id="tipodocumento" class="form-control" name="tipodocumento" >
+                                                    <option value="">Selecione una opcion</option>}
+                                                    @foreach($all_tipo_documento as $data)
+                                                    <option value="{{$data->idtipodocumento}}">{{$data->nombre}}</option>
+                                                    @endforeach
+                                                </select>
+                            </div>
+                    </div>
 
 
 
@@ -323,6 +345,39 @@
                                 </select>
                             </div>
                  </div>
+
+
+                 <div class="col-md-6" style="margin-top: 20px">
+                            <div class="col-md-4">
+                            <label for="tipocontrato"  class="col-md-4 form-control" style="border:none">Tipo de Contrato</label>
+                             </div>
+
+                            <div class="col-md-8">
+                                <select required  id="tipocontrato" class="form-control" name="tipocontrato" >
+                                    <option value="1">Termino Indefinido</option>
+                                    <option value="2">Termino Fijo</option>
+                                    <option value="3">Prestación de Servicios</option>
+                                    <option value="4">Horas Labor</option>
+                                    <option value="5">Aprendis</option>
+
+                                </select>
+                            </div>
+                 </div>
+
+                 <div class="row">
+
+                     <div class="col-md-6" style="margin-top: 20px">
+                    <div class="col-md-4">
+                       <label class="form-control" style="border:none" for="logo">Foto</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input style="background-color: #fff" class="form-control"  id="logo" type="file" name="logo"  >
+                    </div>
+                </div>
+
+                 </div>
+
+
 
 
                  <div class="col-sm-12">
@@ -929,6 +984,14 @@
   </div>
   </div>
 </div>
+<style>
+.avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+</style>
 @endforeach
 
 <!---********************************************---->
@@ -1037,6 +1100,10 @@
             $("#liquidarsalud").val("{{$elemento->liquidarsalud}}");
             $("#fondo").val("{{$elemento->fondo}}");
             $("#idcargo").val("{{$elemento->idcargo}}");
+            $("#tipocontrato").val("{{$elemento->tipocontrato}}");
+            $("#tipodocumento").val("{{$elemento->tipodocumento}}");
+            
+            
             
          
 

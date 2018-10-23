@@ -178,8 +178,10 @@
                                               <li><a tabindex="-1" href="{{route('All_Banco')}}">Bancos</a></li>
                                               <li><a tabindex="-1" href="{{route('All_Articulo')}}">Articulos</a></li>
                                                <li><a tabindex="-1" href="{{route('All_Medida')}}">Unidades</a></li>
-          <li class="dropdown-submenu">
-          </li> 
+
+
+
+           
         </ul> 
       </li>
     </ul>

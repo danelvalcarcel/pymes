@@ -90,8 +90,8 @@
                               </div>
 
                                 <ul id="desplegable1" class="dropdown-menu">
-
-                                  <li><a tabindex="-1" href="{{route('Facturacion.show',['id'=>5])}}">Facturar</a></li>
+                                  <li><a tabindex="-1" href="{{route('Facturacion.index')}}">Facturar</a></li>
+                                  <li><a tabindex="-1" href="{{route('Facturacion.show',['id'=>5])}}">Facturaracion</a></li>
 
                                   <li><a tabindex="-1" href="{{route('All_Reimprime_Fact')}}">Reimprimir Factura</a></li>
 

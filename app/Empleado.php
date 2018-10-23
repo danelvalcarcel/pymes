@@ -16,7 +16,7 @@ class Empleado extends Model
         'apellidos', 'direccion', 'telefono', 'liquidarsalud', 'liquidarpension',
          'idcargo', 'genero', 'idempresa', 'nivelestudios', 'idprofesion',
           'id_establecimiento',"sueldo","talla_camisa","talla_pantalon",
-          "talla_zapatos","rh"
+          "talla_zapatos","rh","tipocontrato","tipodocumento","logo"
     ];
 
 

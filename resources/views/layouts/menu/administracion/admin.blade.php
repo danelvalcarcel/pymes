@@ -89,41 +89,32 @@
 
                                   
 
-                               <div style="display:inline-block; margin-left:14px; font-size:16px" class="texto_menu">Usuarios</div>
+                               <div style="display:inline-block; margin-left:14px; font-size:16px" class="texto_menu">Maestros</div>
 
                               </div>
 
                                 <ul id="desplegable1" class="dropdown-menu">
 
-                                  <li><a tabindex="-1" href="/contratacion/tipos_contratos">Modalidad de Contratos</a></li>
-
-                                  <li><a tabindex="-1" href="/contratacion/all_criterios_evaluacion">Criterios Evaluaci&oacuten</a></li>
-
-                                  <li><a tabindex="-1" href="/contratacion/articulos_servicios">Articulos y Servicios</a></li>
-
-                                  <li><a tabindex="-1" href="/contratacion/tipos_actas">Tipos Actas</a></li>
-
-                                  <li><a tabindex="-1" href="/contratacion/tipos_documentos">Clases de Documentos</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/tipos_avances">Tipos Avances</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/tipos_polizas">Tipos polizas</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/aseguradoras">Aseguradoras</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/entes_control">Entes de Control</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/terceros">Terceros</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/responsables">Responsables</a></li>
+        <li class="dropdown-submenu">
+                <a class="test" tabindex="-1" >MIS ARTICULOS<span class="caret"></span></a>
+                <ul class="dropdown-menu" style="margin-left:160px; margin-top:-33px">
+                                                        <li><a tabindex="-1" href="{{route('All_MisArticulo')}}">MIS ARTICULOS</a></li>
+                                                        <li><a tabindex="-1" href="{{route('All_MisArticulo_Carga')}}">CARGAR ARTICULOS</a></li>
 
                               
 
                                 </ul>
+                              </li>
 
-                              </div>
+                               <li><a tabindex="-1" href="{{route('All_Cliente')}}">CLIENTES</a></li>
+                            </ul>
+
+
+
+                              
 
           </li>
+
 
           
 
@@ -147,29 +138,9 @@
 
                                 <ul id="desplegable1" class="dropdown-menu">
 
-                                  <li><a tabindex="-1" href="/contratacion/comite_seguimiento">Comite de Seguimiento</a></li>
+                                  <li><a tabindex="-1" href="/contratacion/comite_seguimiento"></a></li>
 
-                                  <li><a tabindex="-1" href="/contratacion/precontratos">Precontratos</a></li>
 
-                                  <li><a tabindex="-1" href="/contratacion/licitaciones">Licitaciones</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/oferentes">Oferentes</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/contratos">Contratos</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/otrossi">OtrosSi</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/suspensiones">Suspensiones</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/reinicios">Reinicios</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/cesioness">Cesiones</a></li>
-
-                                   <li><a tabindex="-1" href="/contratacion/liquidaciones">Liquidaci贸n de Contratos</a></li>
-
-                                  
-
-                                  
 
                               
 
@@ -205,21 +176,8 @@
 
     <ul id="desplegable1" class="dropdown-menu">
 
-     <li><a tabindex="-1" href="/contratacion/estado_licitaciones">ARL</a></li>
+     <li><a tabindex="-1" href="/contratacion/estado_licitaciones"></a></li>
 
-     <li><a tabindex="-1" href="/contratacion/estado_contratos">EPS</a></li>
-
-     <li><a tabindex="-1" href="/contratacion/contratos_en_ejecucion">EPP</a></li>
-
-     <li><a tabindex="-1" href="/contratacion/contraros_sector">PUC</a></li>
-
-     <li><a tabindex="-1" href="/contratacion/contratos_eferente">GRUPOS</a></li>
-     <li><a tabindex="-1" href="/contratacion/contratos_eferente">ELEMENTOS</a></li>
-     <li><a tabindex="-1" href="/contratacion/contratos_eferente">TIPOS INGRESOS</a></li>
-     <li><a tabindex="-1" href="/contratacion/contratos_eferente">TIPOS EGRESOS</a></li>
-     <li><a tabindex="-1" href="/contratacion/contratos_eferente">TIPOS DE DOCUMENTOS</a></li>
-     <li><a tabindex="-1" href="/contratacion/contratos_eferente">TIPOS ENFERMEDADES</a></li>
-     <li><a tabindex="-1" href="/contratacion/contratos_eferente">PROFESIONES</a></li>
 
     </ul>
 

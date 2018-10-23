@@ -11,7 +11,7 @@ class Producto extends Model
     protected $table="productos";
     protected $fillable=["nombre","codigo",'categoria_id',"tamanio",'medida_id',
                         "color","foto","estado","descripcion","precio_costo","precio_venta",
-                        "estado_iva","sucursale_id","empresa_id","id_establecimiento"];
+                        "estado_iva","sucursale_id","empresa_id","id_establecimiento","article_pyme"];
 
     public function inventario()
     {

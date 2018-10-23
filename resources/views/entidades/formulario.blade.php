@@ -24,7 +24,14 @@
                 @endif
 
                 <div class="panel-body">
-            <form action="{{ route($ruta)}}" method="post">
+
+                   <div class="col-md-12" style="text-align: center;" >
+                   @if($elemento->logo != "")
+                  <img src="{{url('/uploads/load_files_incapacidades/'.$elemento->logo)}}" alt="Avatar" class="avatar">
+                @endif
+                   
+                </div>
+            <form action="{{ route($ruta)}}" method="post" enctype="multipart/form-data">
                  {{ csrf_field() }}
                 <div class="row">
 
@@ -197,6 +204,18 @@
                             </div>
                         </div> 
 
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-sm-6">
+                    <div class="col-md-4">
+                       <label class="form-control" style="border:none" for="logo">Logo</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control"  id="logo" type="file" name="logo"  >
+                    </div>
+                </div>
+                </div>
+
+
 
 
 
@@ -241,6 +260,14 @@
         </div>
     </div>
 </div>
+<style>
+.avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+</style>
 @endsection
 
 @section('script')

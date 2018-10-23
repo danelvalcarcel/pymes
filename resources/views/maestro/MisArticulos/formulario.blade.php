@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.menu.maestros.admin')
+@include('layouts.menu.administracion.admin')
 <div class="main-content">
     <div class="main-content-inner">
         <div class="col-md-12">
@@ -172,9 +172,14 @@
                         <input required class="form-control" id="valor_pormayor" type="text" name="valor_pormayor" value="{{substr($elemento->valor_pormayor,0,-3)}}"  >
                     </div>
                 </div>
-
-
-                
+                <div class="col-md-6"  style="margin-top: 20px">
+                    <div class="col-md-6">
+                       <label class="form-control" style="border:none" for="inicial">Cantidad Inicial</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input required class="form-control" id="inicial" type="number" name="inicial" value="{{$elemento->inicial}}"  >
+                    </div>
+                </div>
 
 
 
@@ -190,22 +195,22 @@
                         
                 
                     <div class="col-sm-12" style="padding-top: 30px">
-                                         @if($ruta =="Articulo_update" )
+                                         @if($ruta =="MisArticulo_update" )
                                          <div class="col-sm-6">
                                          <input type="hidden" name="id" value="{{$id}}">
                                         <input type="submit" id="save_elemento" value="Actualizar" class="btn col-md-10 col-md-offset-1 btn-success" style="background: #a50029; color: #fff" >
                                         </div>
                                         <div class="col-sm-6">
-                                        <a href="{{route('All_Articulo')}}" class="btn col-md-10 btn-warning col-md-offset-1 "  >
+                                        <a href="{{route('All_MisArticulo')}}" class="btn col-md-10 btn-warning col-md-offset-1 "  >
                                         Volver a Inicio
                                         </a>
                                         </div>
-                                       @elseif($ruta =="Articulo_create" )
+                                       @elseif($ruta =="MisArticulo_create" )
                                        <div class="col-sm-6">
                                         <input type="submit" id="save_elemento" value="Crear" class="btn col-md-10 col-md-offset-1 btn-success" style="background: #a50029; color: #fff" >
                                         </div>
                                         <div class="col-sm-6">
-                                        <a href="{{route('All_Articulo')}}" class="btn btn-warning col-md-10 col-md-offset-1 "  >
+                                        <a href="{{route('All_MisArticulo')}}" class="btn btn-warning col-md-10 col-md-offset-1 "  >
                                        Volver a Inicio
                                         </a>
                                         </div>

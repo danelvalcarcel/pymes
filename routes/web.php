@@ -173,7 +173,11 @@ Route::post('/Categoria_update', 'Maestros\CategoriaController@Categoria_update'
 Route::get('/All_Categoria', 'Maestros\CategoriaController@All_Categoria')->name('All_Categoria');
 Route::post('/delete_Categoria/{id}', 'Maestros\CategoriaController@delete_Categoria')->name('delete_Categoria');
 
-
+Route::get('/formulario_Cliente/{id}/{ruta}/', 'ClienteController@formulario_Cliente')->name('formulario_Cliente');
+Route::post('/Cliente_create', 'ClienteController@Cliente_create')->name('Cliente_create');
+Route::post('/Cliente_update', 'ClienteController@Cliente_update')->name('Cliente_update');
+Route::get('/All_Cliente', 'ClienteController@All_Cliente')->name('All_Cliente');
+Route::post('/delete_Cliente/{id}', 'ClienteController@delete_Cliente')->name('delete_Cliente');
 
 Route::get('/formulario_Medida/{id}/{ruta}/', 'Maestros\MedidaController@formulario_Medida')->name('formulario_Medida');
 Route::post('/Medida_create', 'Maestros\MedidaController@Medida_create')->name('Medida_create');
@@ -206,6 +210,13 @@ Route::get('/All_Articulo', 'Maestros\ArticuloController@All_Articulo')->name('A
 Route::post('/delete_Articulo/{id}', 'Maestros\ArticuloController@delete_Articulo')->name('delete_Articulo');
 
 
+
+Route::get('/formulario_MisArticulo/{id}/{ruta}/', 'Maestros\MisArticuloController@formulario_Articulo')->name('formulario_MisArticulo');
+Route::post('/MisArticulo_create', 'Maestros\MisArticuloController@Articulo_create')->name('MisArticulo_create');
+Route::post('/MisArticulo_update', 'Maestros\MisArticuloController@Articulo_update')->name('MisArticulo_update');
+Route::get('/All_MisArticulo', 'Maestros\MisArticuloController@All_Articulo')->name('All_MisArticulo');
+Route::get('/All_MisArticulo_Carga', 'Maestros\MisArticuloController@All_Articulo_Carga')->name('All_MisArticulo_Carga');
+Route::post('/delete_MisArticulo/{id}', 'Maestros\MisArticuloController@delete_Articulo')->name('delete_MisArticulo');
 
 
 

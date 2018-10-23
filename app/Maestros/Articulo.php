@@ -10,7 +10,7 @@ class Articulo extends Model
 
 
     
-          protected $table ="pyme_articulos";
+    protected $table ="pyme_articulos";
     protected $primaryKey = 'id_articulo';
     public $timestamps = false;
     protected $fillable = [
@@ -19,7 +19,7 @@ class Articulo extends Model
       'updatedDtm', 'updatedby', 'porcentaje_iva',
        'porcentaje_descuento', 'valor_iva', 
        'valor_descuento', 'id_medida', 'valor_pormayor',"utilidad",
-       "valor_total","tipo","id_establecimiento","codigo"
+       "valor_total","tipo","id_establecimiento","codigo","inicial"
     ];
 
 

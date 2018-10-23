@@ -12,7 +12,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                <div class="panel-heading">SINTEC PLUS::1.001(2018)</div>
+                <div class="panel-heading">SINTEC +:1.001(2018)</div>
 
                 <div class="panel-body">
                    @php
