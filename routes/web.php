@@ -139,7 +139,7 @@ Route::post('/delete_Epp/{id}', 'EppController@delete_Epp')->name('delete_Epp');
 Route::get('/formulario_Retiro/{id}/{ruta}/', 'RetiroController@formulario_Retiro')->name('formulario_Retiro');
 Route::post('/Retiro_create', 'RetiroController@Retiro_create')->name('Retiro_create');
 Route::post('/Retiro_update', 'RetiroController@Retiro_update')->name('Retiro_update');
-Route::get('/All_Retiro', 'RetiroController@All_Retiro')->name('All_Retiro');
+Route::any('/All_Retiro/{ruta?}', 'RetiroController@All_Retiro')->name('All_Retiro');
 Route::post('/delete_Retiro/{id}', 'RetiroController@delete_Retiro')->name('delete_Retiro');
 
 
@@ -161,8 +161,18 @@ Route::get('/All_Puc', 'Maestros\PucController@All_Puc')->name('All_Puc');
 Route::post('/delete_Puc/{id}', 'Maestros\PucController@delete_Puc')->name('delete_Puc');
 
 
+Route::get('/formulario_Sede/{id}/{ruta}/', 'Maestros\SedeController@formulario_Sede')->name('formulario_Sede');
+Route::post('/Sede_create', 'Maestros\SedeController@Sede_create')->name('Sede_create');
+Route::post('/Sede_update', 'Maestros\SedeController@Sede_update')->name('Sede_update');
+Route::get('/All_Sede', 'Maestros\SedeController@All_Sede')->name('All_Sede');
+Route::post('/delete_Sede/{id}', 'Maestros\SedeController@delete_Sede')->name('delete_Sede');
 
 
+Route::get('/formulario_NovedadeSede/{id}/{ruta}/', 'Sedes\NovedadeSedeController@formulario_NovedadeSede')->name('formulario_NovedadeSede');
+Route::post('/NovedadeSede_create', 'Sedes\NovedadeSedeController@NovedadeSede_create')->name('NovedadeSede_create');
+Route::post('/NovedadeSede_update', 'Sedes\NovedadeSedeController@NovedadeSede_update')->name('NovedadeSede_update');
+Route::get('/All_NovedadeSede', 'Sedes\NovedadeSedeController@All_NovedadeSede')->name('All_NovedadeSede');
+Route::post('/delete_NovedadeSede/{id}', 'Sedes\NovedadeSedeController@delete_NovedadeSede')->name('delete_NovedadeSede');
 
 
 
@@ -302,7 +312,7 @@ Route::post('/delete_Enfermedade/{id}', 'EnfermedadeController@delete_Enfermedad
 Route::get('/formulario_Licencia/{id}/{ruta}/', 'LicenciaController@formulario_Licencia')->name('formulario_Licencia');
 Route::post('/Licencia_create', 'LicenciaController@Licencia_create')->name('Licencia_create');
 Route::post('/Licencia_update', 'LicenciaController@Licencia_update')->name('Licencia_update');
-Route::get('/All_Licencia', 'LicenciaController@All_Licencia')->name('All_Licencia');
+Route::any('/All_Licencia', 'LicenciaController@All_Licencia')->name('All_Licencia');
 Route::post('/delete_Licencia/{id}', 'LicenciaController@delete_Licencia')->name('delete_Licencia');
 
 
@@ -312,7 +322,7 @@ Route::post('/delete_Licencia/{id}', 'LicenciaController@delete_Licencia')->name
 Route::get('/formulario_Vacacione/{id}/{ruta}/', 'VacacioneController@formulario_Vacacione')->name('formulario_Vacacione');
 Route::post('/Vacacione_create', 'VacacioneController@Vacacione_create')->name('Vacacione_create');
 Route::post('/Vacacione_update', 'VacacioneController@Vacacione_update')->name('Vacacione_update');
-Route::get('/All_Vacacione', 'VacacioneController@All_Vacacione')->name('All_Vacacione');
+Route::any('/All_Vacacione', 'VacacioneController@All_Vacacione')->name('All_Vacacione');
 Route::post('/delete_Vacacione/{id}', 'VacacioneController@delete_Vacacione')->name('delete_Vacacione');
 
 
@@ -368,7 +378,7 @@ Route::post('/Report_Novedade/', 'NovedadeController@Report_Novedade')->name('Re
 Route::get('/formulario_Evento/{id}/{ruta}/', 'EventoController@formulario_Evento')->name('formulario_Evento');
 Route::post('/Evento_create', 'EventoController@Evento_create')->name('Evento_create');
 Route::post('/Evento_update', 'EventoController@Evento_update')->name('Evento_update');
-Route::get('/All_Evento', 'EventoController@All_Evento')->name('All_Evento');
+Route::any('/All_Evento', 'EventoController@All_Evento')->name('All_Evento');
 Route::post('/delete_Evento/{id}', 'EventoController@delete_Evento')->name('delete_Evento');
 
 
@@ -378,7 +388,7 @@ Route::post('/delete_Evento/{id}', 'EventoController@delete_Evento')->name('dele
 Route::get('/formulario_CambioEps/{id}/{ruta}/', 'CambioEpsController@formulario_CambioEps')->name('formulario_CambioEps');
 Route::post('/CambioEps_create', 'CambioEpsController@CambioEps_create')->name('CambioEps_create');
 Route::post('/CambioEps_update', 'CambioEpsController@CambioEps_update')->name('CambioEps_update');
-Route::get('/All_CambioEps', 'CambioEpsController@All_CambioEps')->name('All_CambioEps');
+Route::any('/All_CambioEps', 'CambioEpsController@All_CambioEps')->name('All_CambioEps');
 Route::post('/delete_CambioEps/{id}', 'CambioEpsController@delete_CambioEps')->name('delete_CambioEps');
 
 
@@ -386,7 +396,7 @@ Route::post('/delete_CambioEps/{id}', 'CambioEpsController@delete_CambioEps')->n
 Route::get('/formulario_CambioAfp/{id}/{ruta}/', 'CambioAfpController@formulario_CambioAfp')->name('formulario_CambioAfp');
 Route::post('/CambioAfp_create', 'CambioAfpController@CambioAfp_create')->name('CambioAfp_create');
 Route::post('/CambioAfp_update', 'CambioAfpController@CambioAfp_update')->name('CambioAfp_update');
-Route::get('/All_CambioAfp', 'CambioAfpController@All_CambioAfp')->name('All_CambioAfp');
+Route::any('/All_CambioAfp', 'CambioAfpController@All_CambioAfp')->name('All_CambioAfp');
 Route::post('/delete_CambioAfp/{id}', 'CambioAfpController@delete_CambioAfp')->name('delete_CambioAfp');
 
 

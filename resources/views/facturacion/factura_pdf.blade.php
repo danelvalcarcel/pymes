@@ -89,8 +89,9 @@
                                                                             <td id="nombre">{{$inventario->producto->nombre}}</td>
                                                                             <td id="cantidad" data-max_canti="{{$inventario->cantidad }}">{{number_format($inventario->pivot->cantidad_inv,0)}}</td>
                                                                             <td id="precio_prod">{{number_format( $inventario->producto->precio_venta,2)}}</td>
-                                                                            <td id="descuento_aplicado" data-descuento="{{$inventario->pivot->descuento}}">{{$inventario->pivot->descuento}}%</td>
+                                                                            
                                                                             <td>19%</td>
+                                                                            <td id="descuento_aplicado" data-descuento="{{$inventario->pivot->descuento}}">{{$inventario->pivot->descuento}}%</td>
                                                                             <td data-descuento="{{$inventario->pivot->descuento}}" id="total">
                                                                                 <div class="row">
                                                                                     <div class="col-md-9" style="padding-right: 0" id="total_val">{{number_format( $inventario->pivot->dinero,2)}}</div>

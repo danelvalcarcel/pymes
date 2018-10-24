@@ -55,6 +55,21 @@
                         </div> 
 
 
+                          <div class="col-md-12" style="margin-top: 10px">
+                             <div class="col-md-4">
+                            <label for="idsede" class="col-md-4 form-control" style="border:none">Sede</label>
+                        </div>
+
+                            <div class="col-md-6">
+                                <select id="idsede" class="form-control" name="idsede" >
+                                    @foreach($Sedes as $data)
+                                    <option class="{{$data->id_establecimiento}}" value="{{$data->idsede}}">{{$data->nombre}}</option>
+                                    @endforeach
+                                </select>
+                                
+                            </div>
+                        </div> 
+
 
                 <div class="col-md-12" >
                     <div class="col-md-4">
@@ -232,7 +247,23 @@
         $("#roleid").val("{{$elemento->roleid}}");
         $("#id_establecimiento").val("{{$elemento->id_establecimiento}}")
          $("#estado").val("{{$elemento->estado}}")
-       
+         
+         
+        $("#id_establecimiento").on("change", function(){
+
+          var clase = $(this).val();
+            
+          $("#idsede > option").hide();
+          $("#idsede").val("");
+          $("#idsede option."+clase).show();
+          
+          if($("#idsede > option."+clase).length >0){
+            $("#idsede").val("{{$elemento->idsede}}")
+          }
+          
+        });
+        $("#id_establecimiento").change();
+        
 
 
          $("#subproceso_id").on("change", function(){

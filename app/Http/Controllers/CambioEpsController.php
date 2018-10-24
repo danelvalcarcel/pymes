@@ -39,6 +39,62 @@ class CambioEpsController extends Controller
         $CambioEpss="";
         $modulos = Modulos::all();
          $user = User::find(Auth::user()->id_usuario);
+                  $cargos= Cargo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+          $data_filtro1="";
+        $data_filtro2="";
+      $Centros_trabajos = Centros_trabajo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
+             $data_filtro1=$request["nombre_campo"];
+          $campo=$request["busquedad"];
+          $data_filtro2= $campo;
+
+          $CambioEpss =CambioEps::select("*")
+            ->join("pyme_empleados","pyme_cambioeps.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.nombres", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_cambioeps.id_establecimiento', '=', $user->id_establecimiento)
+            ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_cambioeps.id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+        }
+        else if($request["nombre_campo"]=="idcargo"||$request["nombre_campo"]== "idcentro"){
+          $campo="";
+          $data_filtro1=$request["nombre_campo"];
+         
+          if($request["nombre_campo"]=="idcargo"){
+            $campo =$request["cargo"];
+          }else{
+            $campo =$request["centro"];
+          }
+          $data_filtro2= $campo;
+
+
+             $CambioEpss =CambioEps::select("*")
+            ->join("pyme_empleados","pyme_cambioeps.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
+            ->where('pyme_cambioeps.id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+        }
+
+          else if($request["nombre_campo"]=="documento" && isset($request["busquedad"])==true){
+          
+          $data_filtro1=$request["nombre_campo"];
+          $campo=$request["busquedad"];
+          $data_filtro2= $campo;
+           $CambioEpss =CambioEps::select("*")
+            ->join("pyme_empleados","pyme_cambioeps.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_cambioeps.id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+
+        }
+
+
+        else{
+            $CambioEpss =CambioEps::where("id",">",0)
+            ->where('id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+        }
+        /*
         if($request["busquedad"]){
             $CambioEpss = CambioEps::where("fecha_desde",">=",$request["busquedad"])
             ->where("fecha_hasta","<=",$request["busquedad"])
@@ -49,10 +105,13 @@ class CambioEpsController extends Controller
             ->where('id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
         }
-       
+       */
          return view('thumano.CambioEpss.home', array("CambioEpss"=>$CambioEpss,"title_menu"=>"CambioEps",
             "title"=>"Cambio Eps","user"=>$user,"Modulos"=>$modulos,
-            "nombre_modulo"=>$this->nombre_modulo)); 
+            "nombre_modulo"=>$this->nombre_modulo,"cargos"=>$cargos,
+            "Centros_trabajos"=>$Centros_trabajos,
+"data_filtro1"=>$data_filtro1,"data_filtro2"=>$data_filtro2)); 
+
     }
 
 

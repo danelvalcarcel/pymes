@@ -37,6 +37,8 @@
                             <tr>
                             <td>#</td>
                             <td>Nombres</td>
+                            <td>Empresa</td>
+                            <td>Sede</td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-eye-open"></i></td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-edit"></i></td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-trash"></i></td>
@@ -47,6 +49,9 @@
                             <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$data->nombres}}</td>
+                            <td>{{$data->Entidad->nombre}}</td>
+                            <td>{{$data->sede->nombre}}</td>
+
                             <td style="text-align: center;"><a href="{{route('registeruser',['id'=>$data->id_usuario, 'ruta'=>'ver'])}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
                             <td style="text-align: center;"><a href="{{route('registeruser',['id'=>$data->id_usuario, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td style="text-align: center;">

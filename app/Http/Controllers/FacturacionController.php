@@ -193,7 +193,7 @@ class FacturacionController extends Controller
       //
         $letras_total="";
         $letras_total=NumerosEnLetras::convertir($operaciones->total,'Pesos',false,'Centavos');
-        echo $letras_total;
+
         //  echo json_encode($operaciones);
          $user = User::find(Auth::user()->id_usuario);
           $modulos = Modulos::all();

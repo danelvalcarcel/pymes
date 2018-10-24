@@ -28,4 +28,9 @@ class Entidad extends Model
         return $this->hasMany('App\Empleado','id_establecimiento');
     }
 
+    public function sede()
+    {
+        return $this->hasMany('App\Maestros\Sede','id_establecimiento');
+    }
+
 }

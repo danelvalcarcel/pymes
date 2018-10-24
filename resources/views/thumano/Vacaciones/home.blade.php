@@ -25,11 +25,40 @@
                 }    
                 </style>
                 <div class="panel-body">
-                    <form action="" method="get">
+                    <form id="form_busquedad" action="" method="post">
+                        {{ csrf_field() }}
                         <div class="row">
-                            <div class="col-sm-2" style="text-align: center;" ><label>Nombre</label></div>
-                            <div class="col-sm-4"><input  class="form-control" type="date" name="busquedad" value="" placeholder="Ingrese el nombre"></div>
-                            <div class="col-sm-4" style="padding: 0 20px 0 20px"><input class="btn btn-success col-sm-6" type="submit" name="enviar" value="Buscar"></div>
+                            <div class="col-sm-2" style="text-align: center;" >
+                                <select required class="form-control" name="nombre_campo" id="nombre_campo" name="nombre_campo">
+                                    <option value="documento">Documento</option>
+                                    <option value="nombres">Nombre</option>
+                                    <option value="idcargo">Cargo</option>
+                                    <option value="idcentro">Centro</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-4">
+                                <input  class="form-control" type="text" name="busquedad" id="busquedad" value="" placeholder="Ingrese el nombre">
+                                <select class="form-control" style="display: none;" name="cargo" id="cargo">
+                                     @foreach($cargos as $data)
+                                    <option value="{{$data->idcargo}}">{{$data->nombre}}</option>
+                                    @endforeach
+                                </select>
+
+                                <select class="form-control" style="display: none;" name="centro" id="centro">
+                                    @foreach($Centros_trabajos as $data)
+                                    <option value="{{$data->idcentro}}">{{$data->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-sm-6" style="padding: 0 20px 0 20px">
+                                <input class="btn btn-success col-sm-3" type="submit" name="enviar" value="Buscar">
+                                <div style="display: none">
+                                <a class="btn btn-info col-sm-3" href="{{url('All_Incapacidade')}}" value="Borrar filtros">Borrar Filtro</a>
+                                <input type="hidden" name="reporte" id="reporte" value="">
+                                <input id="pdf_export" class="btn btn-danger col-sm-3" type="submit" name="PDF" value="PDF">
+                                <input id="excel_export" class="btn btn-success col-sm-3" type="submit" name="EXCEL" value="EXCEL">
+                                </div>
+                            </div>
                         </div>
                     </form>
                     <table class="table " style="margin-top: 30px">
@@ -77,3 +106,86 @@
     </div>
 </div>
 @endsection
+@section('script')
+<script >
+    $(document).ready(function($) {
+    $("#nombre_campo").on("change",function(){
+        if($(this).val()==="idcargo"){
+            $("#cargo").show();
+            $("#centro").hide();
+            $("#busquedad").hide();
+        }else if($(this).val()==="idcentro"){
+            $("#centro").show();
+            $("#cargo").hide();
+            $("#busquedad").hide();
+        }else{
+             $("#busquedad").show();
+            $("#cargo").hide();
+            $("#centro").hide();
+        }
+    })
+    var data_campo ="{{$data_filtro1}}";
+    if(data_campo==="idcargo"){
+            $("#cargo").show();
+            $("#cargo").val("{{$data_filtro2}}")
+            $("#centro").hide();
+            $("#busquedad").hide();
+        }else if(data_campo==="idcentro"){
+            $("#centro").show();
+             $("#centro").val("{{$data_filtro2}}")
+            $("#cargo").hide();
+            $("#busquedad").hide();
+        }
+        else if(data_campo==="documento"){
+             $("#busquedad").show();
+            $("#cargo").hide();
+            $("#centro").hide();
+            $("#busquedad").val("{{$data_filtro2}}")
+        }else{
+             $("#busquedad").show();
+            $("#cargo").hide();
+            $("#centro").hide();
+            $("#busquedad").val("{{$data_filtro2}}")
+        }
+    $("#nombre_campo").val("{{$data_filtro1}}");
+
+
+    $("input#pdf_export").on("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            if($("#nombre_campo").val()=="nombres" || $("#nombre_campo").val()=="documento" ){
+
+                 if($("#busquedad").val()===""){
+                         alert("Ingrese un dato de busquedad")
+                return;
+            }
+            }
+           $("#reporte").val("PDF");
+   $('#form_busquedad').attr('action', "{{route('Report_Incapacidade')}}");
+   $('#form_busquedad').submit();
+   $('#form_busquedad').attr('action', "");
+
+    })
+
+
+    $("input#excel_export").on("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            if($("#nombre_campo").val()=="nombres" || $("#nombre_campo").val()=="documento" ){
+
+                 if($("#busquedad").val()===""){
+                         alert("Ingrese un dato de busquedad")
+                return;
+            }
+            }
+            $("#reporte").val("EXCEL");
+   $('#form_busquedad').attr('action', "{{route('Report_Incapacidade')}}");
+   $('#form_busquedad').submit();
+    $('#form_busquedad').attr('action', "");
+
+    })
+
+    });
+    </script>
+   @endsection

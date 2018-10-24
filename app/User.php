@@ -39,6 +39,9 @@ class User extends Authenticatable
         return $this->belongsTo('App\Entidad','id_establecimiento');
     }
 
-
+    public function sede()
+    {
+        return $this->belongsTo('App\Maestros\Sede','idsede');
+    }
     
 }

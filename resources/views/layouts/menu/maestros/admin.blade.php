@@ -96,6 +96,7 @@
                                               <ul id="desplegable1" class="dropdown-menu">
 
                                                 <li><a tabindex="-1" href="{{route('All_Entidades')}}">Entidaes</a></li>
+                                                <li><a tabindex="-1" href="{{route('All_Sede')}}">Sedes</a></li>
 
                                                 
                                               </ul>

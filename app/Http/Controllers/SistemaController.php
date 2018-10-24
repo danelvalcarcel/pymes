@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use \stdClass;
 use App\Rol;
+use App\Maestros\Sede;
 use App\Modulos;
 use App\Entidad;
 use Illuminate\Support\Facades\Auth;
@@ -74,6 +75,7 @@ class SistemaController extends Controller
             'id_establecimiento'=> $request['id_establecimiento'],
             'role'=> 1,
             'estado'=> $request["estado"],
+            'idsede'=> $request["idsede"],
             "modulos_id"=>$esquemas
         ]);
          return redirect('/All_users')->with('status', "Usuario Creado Correctamente");
@@ -115,6 +117,8 @@ class SistemaController extends Controller
           $elemento1->updatedBy =Auth::id();
           $elemento1->updatedDtm =date('Y-m-d H:i:s');
           $elemento1->estado =$request["estado"];
+          $elemento1->idsede =$request["idsede"];
+          
           $elemento1->modulos_id=$esquemas;
           $elemento1->save();
          return redirect('/All_users')->with('status', "Usuario Actualizado Correctamente");
@@ -155,6 +159,7 @@ class SistemaController extends Controller
         $Roles = Rol::All();
         $Modulos = Modulos::All();
         $Entidades = Entidad::All();
+        $Sedes =Sede::all();
         $elemento="";
         if($ruta=="actualizar"){
           $ruta ="User_update";
@@ -175,6 +180,8 @@ class SistemaController extends Controller
           $elemento1->meta_bucaramanga ="";
           $elemento1->estado ="";
           $elemento1->modulos_id="";
+          $elemento1->idsede="";
+          
           $elemento = $elemento1;
         }else{
            $ruta ="All_users";
@@ -184,7 +191,7 @@ class SistemaController extends Controller
 
       return view('auth.register', array('elemento' => $elemento,"id"=>$id,"ruta"=>$ruta,
         "Roles"=>$Roles,"Modulos"=>$Modulos,"Entidades"=>$Entidades,
-        "user"=>$user, "estilo"=>$estilo,"Modulos"=>$modulos,
+        "user"=>$user, "estilo"=>$estilo,"Modulos"=>$modulos,"Sedes"=>$Sedes,
             "nombre_modulo"=>$this->nombre_modulo));
        
     }

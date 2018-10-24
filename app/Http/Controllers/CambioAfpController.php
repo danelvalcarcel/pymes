@@ -37,7 +37,63 @@ class CambioAfpController extends Controller
         $CambioAfps="";
         $modulos = Modulos::all();
          $user = User::find(Auth::user()->id_usuario);
-        if($request["busquedad"]){
+                 $cargos= Cargo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+          $data_filtro1="";
+        $data_filtro2="";
+      $Centros_trabajos = Centros_trabajo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
+             $data_filtro1=$request["nombre_campo"];
+          $campo=$request["busquedad"];
+          $data_filtro2= $campo;
+
+          $CambioAfps =CambioAfp::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.nombres", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+        }
+        else if($request["nombre_campo"]=="idcargo"||$request["nombre_campo"]== "idcentro"){
+          $campo="";
+          $data_filtro1=$request["nombre_campo"];
+         
+          if($request["nombre_campo"]=="idcargo"){
+            $campo =$request["cargo"];
+          }else{
+            $campo =$request["centro"];
+          }
+          $data_filtro2= $campo;
+
+
+             $CambioAfps =CambioAfp::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+        }
+
+          else if($request["nombre_campo"]=="documento" && isset($request["busquedad"])==true){
+          
+          $data_filtro1=$request["nombre_campo"];
+          $campo=$request["busquedad"];
+          $data_filtro2= $campo;
+            $CambioAfps =CambioAfp::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+
+        }
+
+
+        else{
+            $CambioAfps =CambioAfp::where("id",">",0)
+            ->where('id_establecimiento', '=', $user->id_establecimiento)
+            ->paginate(10);
+        }
+
+        /*if($request["busquedad"]){
             $CambioAfps = CambioAfp::where("fecha_desde",">=",$request["busquedad"])
             ->where("fecha_hasta","<=",$request["busquedad"])
             ->where('id_establecimiento', '=', $user->id_establecimiento)
@@ -46,11 +102,13 @@ class CambioAfpController extends Controller
             $CambioAfps = CambioAfp::where("id",">",0)
             ->where('id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
-        }
+        }*/
        
          return view('thumano.CambioAfps.home', array("CambioAfps"=>$CambioAfps,"title_menu"=>"CambioAfp",
             "title"=>"Cambio Afp","user"=>$user,"Modulos"=>$modulos,
-            "nombre_modulo"=>$this->nombre_modulo)); 
+            "nombre_modulo"=>$this->nombre_modulo,"cargos"=>$cargos,
+            "Centros_trabajos"=>$Centros_trabajos,
+"data_filtro1"=>$data_filtro1,"data_filtro2"=>$data_filtro2)); 
     }
 
 
