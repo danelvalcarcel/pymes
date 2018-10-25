@@ -84,6 +84,7 @@
                             <td>Cargo</td>
                             <td>Centro</td>
                             <td>Motivo</td>
+                            <td>Estado</td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-eye-open"></i></td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-edit"></i></td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-trash"></i></td>
@@ -100,6 +101,7 @@
                                <td>{{$Incapacidade->empleado->Cargo->nombre}}</td>
                             <td>{{$Incapacidade->empleado->Centro_trabajo->nombre}}</td>
                             <td>@if($Incapacidade->idtipoenfermedad) {{ $Incapacidade->TipoMotivo->nombre}} @endif</td>
+                            <td>{{$Incapacidade->estado}}</td>
                             <td style="text-align: center;"><a title="Ver Elemento" href="{{route('formulario_Incapacidade',['id'=>$Incapacidade->id, 'ruta'=>'ver'])}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
                             <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Incapacidade',['id'=>$Incapacidade->id, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td style="text-align: center;">

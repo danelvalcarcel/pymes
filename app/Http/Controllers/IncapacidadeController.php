@@ -312,6 +312,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $elemento1->fecha_hasta=$request['fecha_hasta'];
            $elemento1->idtipoenfermedad=$request['idtipoenfermedad'];
            $elemento1->idtipomotivo=$request['idtipomotivo'];
+           $elemento1->estado=$request['estado'];
 
            //$elemento1->id_establecimiento=>$user->id_establecimiento;
            if($request["documento_incapacidad"]){
@@ -352,6 +353,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            'fecha_desde'=>$request['fecha_desde'],
            'fecha_hasta'=>$request['fecha_hasta'],
            'idtipoenfermedad'=>$request['idtipoenfermedad'],
+           'estado'=>$request['estado'],
            'id_establecimiento'=>$user->id_establecimiento,
            'documento_incapacidad'=>$storage_name,
            "idtipomotivo"=>$request['idtipomotivo']
@@ -403,6 +405,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
           $elemento1->idtipoenfermedad ="";
           $elemento1->documento_incapacidad="";
           $elemento1->idtipomotivo="";
+          $elemento1->estado="";
           $elemento = $elemento1;
         }else{
            $ruta ="All_Incapacidade";

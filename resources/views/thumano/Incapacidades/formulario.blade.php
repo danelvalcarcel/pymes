@@ -45,8 +45,7 @@
 
                             <div class="col-md-6">
                                 <select  id="idempleado" class="form-control" name="idempleado" >
-                                    <option value="0">Selecciona una opcion</option>}
-                                    option
+                                    <option value="0">Selecciona una opcion</option>
                                     @foreach($Empleados as $data)
                                     <option value="{{$data->idempleado}}">{{$data->nombres}} {{$data->apellidos}}</option>
                                     @endforeach
@@ -74,8 +73,7 @@
 
                             <div class="col-md-6">
                                 <select  id="idtipoenfermedad" class="form-control" name="idtipoenfermedad" >
-                                    <option value="0">Selecciona una opcion</option>}
-                                    option
+                                    <option value="0">Selecciona una opcion</option>
                                     @foreach($Enfermedades as $data)
                                     <option value="{{$data->idtipoenfermedad}}">{{$data->nombre}}</option>
                                     @endforeach
@@ -90,8 +88,7 @@
 
                             <div class="col-md-6">
                                 <select  id="idtipomotivo" class="form-control" name="idtipomotivo" >
-                                    <option value="0">Selecciona una opcion</option>}
-                                    option
+                                    <option value="0">Selecciona una opcion</option>
                                     @foreach($Motivos as $data)
                                     <option value="{{$data->idtipomotivo}}">{{$data->nombre}}</option>
                                     @endforeach
@@ -117,6 +114,20 @@
                     </div>
                     <div class="col-md-6">
                         <input required class="form-control"  id="fecha_hasta" type="date" name="fecha_hasta"  value="{{$elemento->fecha_hasta}}"  >
+                    </div>
+                </div>
+
+
+                <div class="col-md-12" style="margin-top: 20px">
+                    <div class="col-md-4">
+                       <label class="form-control" style="border:none" for="estado">Estado</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control" name="estado" id="estado">
+                            <option value="No Aprobado">No Aprobado</option>
+                            <option value="Aprobado">Aprobada</option>
+                            
+                        </select>
                     </div>
                 </div>
 
@@ -200,6 +211,7 @@
             $("#idtipoenfermedad").val("{{$elemento->idtipoenfermedad}}");
             $("#idempleado").val("{{$elemento->idempleado}}");
             $("#idtipomotivo").val("{{$elemento->idtipomotivo}}");
+            $("#estado").val("{{$elemento->estado}}");
          
 
 

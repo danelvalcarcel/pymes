@@ -130,12 +130,12 @@
 
                                  <ul id="desplegable1" class="dropdown-menu">
 
-                                  <li><a tabindex="-1" href="{{route('All_Retiro',['sede'=>'Sede'])}}">Retiro de Empleados</a></li>
-                                  <li><a tabindex="-1" href="{{route('All_Incapacidade',['sede'=>'Sede'])}}">Incapacidades</a></li>
-                                  <li><a tabindex="-1" href="{{route('All_Licencia',['sede'=>'Sede'])}}">Licencias</a></li>
-                                  <li><a tabindex="-1" href="{{route('All_Vacacione',['sede'=>'Sede'])}}">Vacaciones</a></li>
-                                  <li><a tabindex="-1" href="{{route('All_Novedade',['sede'=>'Sede'])}}">Novedades Hoja de Vida</a></li>
-                                  <li><a tabindex="-1" href="{{route('All_Evento',['sede'=>'Sede'])}}">Eventos</a></li>
+                                  <!--<li><a tabindex="-1" href="{{--route('All_Retiro',['sede'=>'Sede'])--}}">Retiro de Empleados</a></li>-->
+                                  <li><a tabindex="-1" href="{{route('All_Incapacidade',['sede'=>'Sede'])}}">Reportar Incapacidades</a></li>
+                                  <li><a tabindex="-1" href="{{route('All_Licencia',['sede'=>'Sede'])}}">Solicitar Licencias</a></li>
+                                  <li><a tabindex="-1" href="{{route('All_Vacacione',['sede'=>'Sede'])}}">Solicitar Vacaciones</a></li>
+                                <!--  <li><a tabindex="-1" href="{{--route('All_Novedade',['sede'=>'Sede'])--}}">Novedades Hoja de Vida</a></li>
+                                  <li><a tabindex="-1" href="{{--route('All_Evento',['sede'=>'Sede'])--}}">Eventos</a></li>-->
                                 </ul>
 
                               </div>
@@ -168,13 +168,13 @@
 
     <ul id="desplegable1" class="dropdown-menu">
 
-     <li><a tabindex="-1" href="/contratacion/estado_licitaciones">Contratos por Finalizar</a></li>
+     <li><a tabindex="-1" href="">Contratos por Finalizar</a></li>
 
-     <li><a tabindex="-1" href="/contratacion/estado_contratos">Documentos por Finalizar</a></li>
+     <li><a tabindex="-1" href="">Documentos por Finalizar</a></li>
 
-     <li><a tabindex="-1" href="/contratacion/contratos_en_ejecucion">Empleados sin Vacaciones</a></li>
+     <li><a tabindex="-1" href="">Empleados sin Vacaciones</a></li>
 
-     <li><a tabindex="-1" href="/contratacion/contraros_sector">Cumpleaños</a></li>
+     <li><a tabindex="-1" href="">Cumpleaños</a></li>
 
     </ul>
 

@@ -82,6 +82,7 @@
                             <td>Nombre</td>
                             <td>Desde</td>
                             <td>Hasta</td>
+                            <td>Estado</td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-eye-open"></i></td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-edit"></i></td>
                             <td style="text-align: center;"><i class="glyphicon glyphicon-trash"></i></td>
@@ -96,6 +97,7 @@
                              <td>{{$Vacacione->fecha_desde}}</td>
 
                               <td>{{$Vacacione->fecha_hasta}}</td>
+                              <td>{{$Vacacione->estado}}</td>
                             <td style="text-align: center;"><a title="Ver Elemento" href="{{route('formulario_Vacacione',['id'=>$Vacacione->id, 'ruta'=>'ver'])}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
                             <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Vacacione',['id'=>$Vacacione->id, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td style="text-align: center;">

@@ -128,72 +128,17 @@ input, select, option{
                                     4 Tareas para Completar
                                 </li>
 
-                                <li class="dropdown-content">
-                                    <ul class="dropdown-menu dropdown-navbar">
-                                        <li>
-                                            <a href="#">
-                                                <div class="clearfix">
-                                                    <span class="pull-left">Ganancia Neta</span>
-                                                    <span class="pull-right">65%</span>
-                                                </div>
 
-                                                <div class="progress progress-mini">
-                                                    <div style="width:65%" class="progress-bar"></div>
-                                                </div>
-                                            </a>
-                                        </li>
 
-                                        <li>
-                                            <a href="#">
-                                                <div class="clearfix">
-                                                    <span class="pull-left">Incremento Activos</span>
-                                                    <span class="pull-right">35%</span>
-                                                </div>
-
-                                                <div class="progress progress-mini">
-                                                    <div style="width:35%" class="progress-bar progress-bar-danger"></div>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#">
-                                                <div class="clearfix">
-                                                    <span class="pull-left">Bajas</span>
-                                                    <span class="pull-right">15%</span>
-                                                </div>
-
-                                                <div class="progress progress-mini">
-                                                    <div style="width:15%" class="progress-bar progress-bar-warning"></div>
-                                                </div>
-                                            </a>
-                                        </li>
-
-                                        <li>
-                                            <a href="#">
-                                                <div class="clearfix">
-                                                    <span class="pull-left">Funcionamiento</span>
-                                                    <span class="pull-right">90%</span>
-                                                </div>
-
-                                                <div class="progress progress-mini progress-striped active">
-                                                    <div style="width:90%" class="progress-bar progress-bar-success"></div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                <li class="dropdown-footer">
-                                    <a href="#">
-                                        Ver mas Detalles
-                                        <i class="ace-icon fa fa-arrow-right"></i>
-                                    </a>
-                                </li>
                             </ul>
                         </li>
                          <li style="color:#fff; border: none; padding-right: 4px">
-                            
+                            <input style=" display: inline-block; width: 140px; border:none; background: none; color:#fff !important; padding: 0; margin: 0;" type="date" id="fecha_registro" name="fecha_registro" value="{{$user->fecha_registro}}" placeholder="">
+                           
+                         </li>
+                         <li id="hora" style="color: #fff !important;">
+                            00:00:00
+                             
                          </li>
                         
                         <li class="light-blue dropdown-modal">
@@ -243,6 +188,9 @@ input, select, option{
                                         
                                     </a>
                                 </li>
+                                <li style="padding-left: 3px; color:#000" >
+                                    <?php echo  date("Y-m-d") ?>
+                                </li>
 
                                 <li class="divider"></li>
 
@@ -271,10 +219,33 @@ input, select, option{
          <footer class="footer">
         <div class="footer-inner">
             <div class="footer-content">
-               <p class="text-left">Powered by www.Sintec.net</p>
+               <p class="text-left">Powered by  www.sintecpos.com</p>
             </div>
         </div>
     </footer> 
+    </div>
+
+
+        <div class="modal fade" id="inforModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header bg-danger" style="padding-bottom: 0; padding-top: 10px">
+                    <h4 class="modal-title" style="text-align: center"><strong>
+                            Información
+                        </strong></h4>
+                    <button type="button" id="cerrar_info"    class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body  bg-danger" style="padding-top: 0">
+                    <strong> <p id="infor_mostrar" style=" font-weight:bolder;text-align: center;margin-top: 0; color: #000">
+
+                    </p></strong>
+                    <div class="col-md-6 col-md-offset-3" id="estado_operacion" ></div>
+                </div>
+
+            </div>
+        </div>
     </div>
     
     <!-- Scripts -->
@@ -291,6 +262,8 @@ input, select, option{
         <script type="text/javascript" src="{{ asset('common/js/bootstrap.min.js')}}"></script>      
         <script type="text/javascript" src="{{ asset('common/js/funciones.js')}}"></script>  
         <script type="text/javascript" src="{{ asset('common/js/holder.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.1.0/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.1/jquery.fittext.min.js"></script>
         <script>
         
         
@@ -300,6 +273,73 @@ input, select, option{
         
             $(document).ready(function($) {
 
+
+                            $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+
+
+
+                $("#fecha_registro").on("change", function(){
+                var fecha = $(this).val();
+                                    $.ajax({
+                    type:"Post",
+                    dataType:"json",
+                    data:{fecha:fecha},
+                    url:"{{route('Cambiar_Fecha')}}",
+                    success: function(resp){
+                        if(resp["message"]==="OK"){
+                            $("#inforModal .modal-header").addClass("bg-success");
+                            $("#inforModal .modal-body").addClass("bg-success");
+                            $("#inforModal .modal-header").removeClass("bg-danger");
+                            $("#inforModal .modal-body").removeClass("bg-danger");
+                             $("p#infor_mostrar").empty();
+                            $("p#infor_mostrar").text("Fecha Actualizada Correctamente");
+                            $("#inforModal").modal();
+                        }else{
+                            $("#inforModal .modal-header").removeClass("bg-success");
+                            $("#inforModal .modal-body").removeClass("bg-success");
+                            $("#inforModal .modal-header").addClass("bg-danger");
+                            $("#inforModal .modal-body").addClass("bg-danger");
+                             
+                             $("p#infor_mostrar").empty();
+                            $("p#infor_mostrar").text("Se ha presentado un error");
+                            $("#inforModal").modal();
+                            $(this).val("");
+                        }
+                    },
+                        error:function(){
+                            $("#inforModal .modal-header").removeClass("bg-success");
+                            $("#inforModal .modal-body").removeClass("bg-success");
+                            $("#inforModal .modal-header").addClass("bg-danger");
+                            $("#inforModal .modal-body").addClass("bg-danger");
+                             
+                             $("p#infor_mostrar").empty();
+                            $("p#infor_mostrar").text("Se ha presentado un error");
+                            $("#inforModal").modal();
+                            $(this).val("");
+                        }
+
+                            
+
+
+                        });
+
+                });
+
+
+
+
+                
+                $('#hora').fitText(1.3).css("font-size","18px");;
+
+                function update() {
+                  $('#hora').text(moment().format('H:mm:ss')).css("font-size","18px");
+                }
+
+                setInterval(update, 1000);
 
                     if( $("div.sidebar-collapse i").hasClass("fa-angle-double-right")){
              $("div.texto_menu").css("display","none")
@@ -356,6 +396,10 @@ input, select, option{
     e.stopPropagation();
     e.preventDefault();
   });
+
+
+
+
 
     
     

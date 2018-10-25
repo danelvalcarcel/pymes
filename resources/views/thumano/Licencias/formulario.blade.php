@@ -131,6 +131,19 @@
                     </div>
                 </div>
 
+                <div class="col-md-12" style="margin-top: 20px">
+                    <div class="col-md-4">
+                       <label class="form-control" style="border:none" for="estado">Estado</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control" name="estado" id="estado">
+                            <option value="No Aprobado">No Aprobado</option>
+                            <option value="Aprobado">Aprobada</option>
+                            
+                        </select>
+                    </div>
+                </div>
+
 
                 @if($elemento->documento_licencia != "")
                 <div class="col-md-12" style="margin-top: 20px">
@@ -202,6 +215,7 @@
             $("#idtipolicencia").val("{{$elemento->idtipolicencia}}");
             $("#idempleado").val("{{$elemento->idempleado}}");
             $("#remunerada").val("{{$elemento->remunerada}}");
+            $("#estado").val("{{$elemento->estado}}");
             
          
 

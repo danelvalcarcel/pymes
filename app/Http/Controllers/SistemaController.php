@@ -36,6 +36,9 @@ class SistemaController extends Controller
         
         if (Auth::check())
         {
+           $user = User::find(Auth::user()->id_usuario);
+           $user->fecha_registro = date("Y-m-d");
+           $user->save();
        return redirect('/home')->with('status', "Bienvenido al Sistema");
         }
         else
@@ -204,6 +207,15 @@ class SistemaController extends Controller
     {
       User::destroy($id);
       return redirect('/All_users')->with('status', "Usuario Eliminada Correctamente");
+    }
+
+    public function Cambiar_Fecha(Request $request)
+    {
+           $user = User::find(Auth::user()->id_usuario);
+           $user->fecha_registro = $request["fecha"];
+           $user->save();
+           return ["message"=>"OK"];
+      
     }
 
     public function index()

@@ -161,6 +161,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $elemento1->remunerada=$request['remunerada'];
            $elemento1->observacion=$request['observacion'];
            $elemento1->forma=$request['forma'];
+           $elemento1->estado=$request['estado'];
            
            //$elemento1->id_establecimiento=>$user->id_establecimiento;
            if($request["documento_cargar"]){
@@ -207,6 +208,7 @@ return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correcta
            "remunerada"=>$request['remunerada'],
            'id_establecimiento'=>$user->id_establecimiento,
            'forma'=>$request['forma'],
+           'estado'=>$request['estado'],
            'documento_cargar'=>$storage_name
         ]);
 
@@ -257,6 +259,7 @@ return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correcta
           $elemento1->remunerada="";
           $elemento1->observacion="";
           $elemento1->forma="";
+          $elemento1->estado="";
           
           
           $elemento = $elemento1;

@@ -231,7 +231,7 @@ background:none;
          <footer class="footer">
         <div class="footer-inner">
             <div class="footer-content">
-               <p class="text-left">Powered by www.Sintec.net</p>
+               <p class="text-left">Powered by  www.sintecpos.com</p>
             </div>
         </div>
     </footer> 

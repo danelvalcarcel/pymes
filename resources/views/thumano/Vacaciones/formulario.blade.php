@@ -46,8 +46,7 @@
 
                             <div class="col-md-6">
                                 <select  id="idempleado" class="form-control" name="idempleado" >
-                                    <option value="0">Selecciona una opcion</option>}
-                                    option
+                                    <option value="0">Selecciona una opcion</option>
                                     @foreach($Empleados as $data)
                                     <option value="{{$data->idempleado}}">{{$data->nombres}} {{$data->apellidos}}</option>
                                     @endforeach
@@ -89,6 +88,20 @@
                         <select class="form-control" name="forma" id="forma">
                             <option value="1">Tiempo</option>
                             <option value="0">Dinero</option>
+                            
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12" style="margin-top: 20px">
+                    <div class="col-md-4">
+                       <label class="form-control" style="border:none" for="estado">Estado</label>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-control" name="estado" id="estado">
+                            <option value="No Aprobado">No Aprobado</option>
+                            <option value="Aprobado">Aprobada</option>
                             
                         </select>
                     </div>
@@ -153,6 +166,7 @@
             $("#idempleado").val("{{$elemento->idempleado}}");
             $("#remunerada").val("{{$elemento->remunerada}}");
             $("#forma").val("{{$elemento->forma}}");
+            $("#estado").val("{{$elemento->estado}}");
             
          
 

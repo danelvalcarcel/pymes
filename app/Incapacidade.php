@@ -13,7 +13,7 @@ class Incapacidade extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
-      'idempleado', 'documento', 'fecha', 'fecha_desde', 
+      'idempleado', 'documento', 'fecha', 'fecha_desde', "estado",
       'fecha_hasta', 'idtipoenfermedad', 'id_establecimiento',"documento_incapacidad","idtipomotivo"
     ];
 

@@ -61,6 +61,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::post('/login_auth', 'SistemaController@login_auth')->name('login_auth');
+Route::post('/Cambiar_Fecha', 'SistemaController@Cambiar_Fecha')->name('Cambiar_Fecha');
 Route::group(['middleware' => ['auth']], function () {
 Route::get('/registeruser/{id}/{ruta}/', 'SistemaController@register')->name('registeruser');
 Route::post('/User_create', 'SistemaController@User_create')->name('User_create');

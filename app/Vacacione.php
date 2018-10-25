@@ -14,7 +14,7 @@ class Vacacione extends Model
     protected $fillable = [
       'idempleado', 'documento', 'fecha', 'fecha_desde', 'fecha_hasta',
        'idtipolicencia', 'id_establecimiento',"documento_incapacidad",
-       "observacion","documento_cargar","forma"
+       "observacion","documento_cargar","forma","estado"
     ];
 
      public function empleado()

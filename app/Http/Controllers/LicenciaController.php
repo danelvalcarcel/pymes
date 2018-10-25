@@ -159,6 +159,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $elemento1->idtipolicencia=$request['idtipolicencia'];
            $elemento1->remunerada=$request['remunerada'];
            $elemento1->observacion=$request['observacion'];
+           $elemento1->estado=$request['estado'];
            
            //$elemento1->id_establecimiento=>$user->id_establecimiento;
            if($request["documento_licencia"]){
@@ -201,6 +202,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            'fecha_hasta'=>$request['fecha_hasta'],
            'idtipolicencia'=>$request['idtipolicencia'],
            "remunerada"=>$request['remunerada'],
+           "estado"=>$request['estado'],
            'id_establecimiento'=>$user->id_establecimiento,
            'documento_licencia'=>$storage_name
         ]);
@@ -248,6 +250,7 @@ return redirect('/All_Licencia')->with('status', "Elemento Creado Correctamente"
           $elemento1->idtipolicencia ="";
           $elemento1->documento_licencia="";
           $elemento1->remunerada="";
+          $elemento1->estado="";
           $elemento1->observacion="";
           
           
