@@ -25,8 +25,8 @@
 
                 <div class="panel-body">
                                        <div class="col-md-12" style="text-align: center;" >
-                   @if($elemento->logo != "")
-                  <img src="{{url('/uploads/load_files_incapacidades/'.$elemento->logo)}}" alt="Avatar" class="avatar">
+                   @if($elemento->logo)
+                  <img src="{{url('/uploads/load_files_incapacidades/'.$elemento->logo)}}" alt="Avatar" width="100px" height="150px" class="avatar">
                 @endif
                    
                 </div>
@@ -358,7 +358,7 @@
                                     <option value="2">Termino Fijo</option>
                                     <option value="3">Prestación de Servicios</option>
                                     <option value="4">Horas Labor</option>
-                                    <option value="5">Aprendis</option>
+                                    <option value="5">Aprendiz</option>
 
                                 </select>
                             </div>

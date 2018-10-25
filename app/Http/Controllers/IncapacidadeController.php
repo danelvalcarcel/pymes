@@ -30,10 +30,10 @@ class IncapacidadeController extends Controller
 
   protected $nombre_modulo = "Talento Humano";
 
-    public function All_Incapacidade(Request $request)
+    public function All_Incapacidade(Request $request, $sede=null)
     {
         //
-       
+        
         $Incapacidades="";
         $modulos = Modulos::all();
          $user = User::find(Auth::user()->id_usuario);
@@ -41,6 +41,11 @@ class IncapacidadeController extends Controller
           $data_filtro1="";
         $data_filtro2="";
       $Centros_trabajos = Centros_trabajo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+      $menu ="layouts.menu.thumano.admin";
+         if($sede){
+          $menu ="layouts.menu.sedes.admin";
+          $this->nombre_modulo="Sedes";
+        }
 if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
              $data_filtro1=$request["nombre_campo"];
           $campo=$request["busquedad"];
@@ -53,6 +58,17 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
             ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+            if($sede){
+               $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.nombres", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
         }
         else if($request["nombre_campo"]=="idcargo"||$request["nombre_campo"]== "idcentro"){
           $campo="";
@@ -71,6 +87,15 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
             ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+            if($sede){
+                           $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
         }
 
           else if($request["nombre_campo"]=="documento" && isset($request["busquedad"])==true){
@@ -83,6 +108,14 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where("pyme_empleados.".$request["nombre_campo"], 'like', '%' . $request["busquedad"] . '%')
             ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+            if($sede){
+                          $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
 
         }
 
@@ -91,11 +124,18 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             $Incapacidades =Incapacidade::where("id",">",0)
             ->where('id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+            if($sede){
+              $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
         }
        
          return view('thumano.Incapacidades.home', array("Incapacidades"=>$Incapacidades,"title_menu"=>"Incapacidade",
             "title"=>"Incapacidades","user"=>$user,"Modulos"=>$modulos,
-            "cargos"=>$cargos,
+            "cargos"=>$cargos,"sede"=>$sede,"menu"=>$menu,
             "Centros_trabajos"=>$Centros_trabajos,
             "nombre_modulo"=>$this->nombre_modulo, "data_filtro1"=>$data_filtro1,"data_filtro2"=>$data_filtro2)); 
     }
@@ -131,6 +171,19 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->orwhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
             ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+            if($request["sede_expor"]){
+
+              $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.nombres", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->orwhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+
+            }
         }
         else if($request["nombre_campo"]=="idcargo"||$request["nombre_campo"]== "idcentro"){
           $campo="";
@@ -149,6 +202,15 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
             ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+                        if($request["sede_expor"]){
+                          $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
         }
 
           else if($request["nombre_campo"]=="documento" && isset($request["busquedad"])==true){
@@ -162,6 +224,16 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
 
+                        if($request["sede_expor"]){
+                                      $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+
+            }
+
         }
 
 
@@ -169,6 +241,16 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             $Incapacidades =Incapacidade::where("id",">",0)
             ->where('id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+                        if($request["sede_expor"]){
+            $Incapacidades =Incapacidade::select("*")
+            ->join("pyme_empleados","pyme_incapacidades.idempleado","=","pyme_empleados.idempleado")
+            ->where('pyme_incapacidades.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+
+
+            }
         }
           if($request["reporte"]=="PDF"){
           $pdf = PDF::loadView('thumano.Incapacidades.report_pdf', array('incapacidades' => $Incapacidades));
@@ -238,7 +320,12 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            }
  			
           $elemento1->save();
-         return redirect('/All_Incapacidade')->with('status', "Elemento Actualizado Correctamente");
+           if($request['sede']){
+          return redirect('/All_Incapacidade/Sede')->with('status', "Elemento Actualizado Correctamente");
+         }else{
+          return redirect('/All_Incapacidade')->with('status', "Elemento Actualizado Correctamente");
+         }
+         
 
     }
 
@@ -269,14 +356,19 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            'documento_incapacidad'=>$storage_name,
            "idtipomotivo"=>$request['idtipomotivo']
         ]);
+         if($request['sede']){
+          return redirect('/All_Incapacidade/Sede')->with('status', "Elemento Creado Correctamente");
+         }else{
+          return redirect('/All_Incapacidade')->with('status', "Elemento Creado Correctamente");
+         }
 
-        return redirect('/All_Incapacidade')->with('status', "Elemento Creado Correctamente");
+        
     }
 
 
 
 
-    public function formulario_Incapacidade($id,$ruta)
+    public function formulario_Incapacidade($id,$ruta, $sede=null)
     {
         //
         	
@@ -285,9 +377,16 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $user = User::find(Auth::user()->id_usuario);
            $estilo="";
         $elemento="";
-        $Motivos=TipoMotivo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
-        $Enfermedades =Enfermedade::where('id_establecimiento', '=', $user->id_establecimiento)->get();
-        $Empleados=Empleado::all();
+        $Motivos=TipoMotivo::all();
+        $Enfermedades =Enfermedade::all();
+        $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+        $menu ="layouts.menu.thumano.admin";
+         if($sede){
+          $this->nombre_modulo="Sedes";
+          $menu ="layouts.menu.sedes.admin";
+           $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)
+                ->where("idcentro","=",$user->idcentro)->get();
+        }
         $tipos_nomina = Tipos_nomina::all();
         if($ruta=="actualizar"){
           $ruta ="Incapacidade_update";
@@ -312,8 +411,8 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
         }
 
       return view('thumano.Incapacidades.formulario', array('elemento' => $elemento,"id"=>$id,"ruta"=>$ruta,"user"=>$user,"Modulos"=>$modulos,
-        "estilo"=>$estilo,"tipos_nomina"=>$tipos_nomina,"Motivos"=>$Motivos,
-        "Empleados"=>$Empleados,"Enfermedades"=>$Enfermedades,
+        "estilo"=>$estilo,"tipos_nomina"=>$tipos_nomina,"Motivos"=>$Motivos,"sede"=>$sede,
+        "Empleados"=>$Empleados,"Enfermedades"=>$Enfermedades,"menu"=>$menu,
             "nombre_modulo"=>$this->nombre_modulo));
        
     }
@@ -322,7 +421,12 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
  public function delete_Incapacidade($id)
     {
       Incapacidade::destroy($id);
-      return redirect('/All_Incapacidade')->with('status', "Elemento Eliminado Correctamente");
+       if($request['sede']){
+          return redirect('/All_Incapacidade/Sede')->with('status', "Elemento Eliminado Correctamente");
+         }else{
+          return redirect('/All_Incapacidade')->with('status', "Elemento Eliminado Correctamente");
+         }
+      
     }
 
 }

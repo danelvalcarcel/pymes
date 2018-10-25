@@ -57,13 +57,13 @@
 
                           <div class="col-md-12" style="margin-top: 10px">
                              <div class="col-md-4">
-                            <label for="idsede" class="col-md-4 form-control" style="border:none">Sede</label>
+                            <label for="idcentro" class="col-md-4 form-control" style="border:none">Sede</label>
                         </div>
 
                             <div class="col-md-6">
-                                <select id="idsede" class="form-control" name="idsede" >
-                                    @foreach($Sedes as $data)
-                                    <option class="{{$data->id_establecimiento}}" value="{{$data->idsede}}">{{$data->nombre}}</option>
+                                <select id="idcentro" class="form-control" name="idcentro" >
+                                    @foreach($Centros as $data)
+                                    <option class="{{$data->id_establecimiento}}" value="{{$data->idcentro}}">{{$data->nombre}}</option>
                                     @endforeach
                                 </select>
                                 
@@ -248,18 +248,19 @@
         $("#id_establecimiento").val("{{$elemento->id_establecimiento}}")
          $("#estado").val("{{$elemento->estado}}")
          
-         
+         var decide=1;
         $("#id_establecimiento").on("change", function(){
 
           var clase = $(this).val();
             
-          $("#idsede > option").hide();
-          $("#idsede").val("");
-          $("#idsede option."+clase).show();
+          $("#idcentro > option").hide();
+          $("#idcentro").val("");
+          $("#idcentro option."+clase).show();
           
-          if($("#idsede > option."+clase).length >0){
-            $("#idsede").val("{{$elemento->idsede}}")
+          if($("#idcentro > option."+clase).length >0 && decide ===1){
+            $("#idcentro").val("{{$elemento->idcentro}}")
           }
+          decide=2;
           
         });
         $("#id_establecimiento").change();

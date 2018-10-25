@@ -128,10 +128,14 @@
 
                               </div>
 
-                                <ul id="desplegable1" class="dropdown-menu">
+                                 <ul id="desplegable1" class="dropdown-menu">
 
-                                  <li><a tabindex="-1" href="/contratacion/comite_seguimiento">Novedad</a></li>
-
+                                  <li><a tabindex="-1" href="{{route('All_Retiro',['sede'=>'Sede'])}}">Retiro de Empleados</a></li>
+                                  <li><a tabindex="-1" href="{{route('All_Incapacidade',['sede'=>'Sede'])}}">Incapacidades</a></li>
+                                  <li><a tabindex="-1" href="{{route('All_Licencia',['sede'=>'Sede'])}}">Licencias</a></li>
+                                  <li><a tabindex="-1" href="{{route('All_Vacacione',['sede'=>'Sede'])}}">Vacaciones</a></li>
+                                  <li><a tabindex="-1" href="{{route('All_Novedade',['sede'=>'Sede'])}}">Novedades Hoja de Vida</a></li>
+                                  <li><a tabindex="-1" href="{{route('All_Evento',['sede'=>'Sede'])}}">Eventos</a></li>
                                 </ul>
 
                               </div>

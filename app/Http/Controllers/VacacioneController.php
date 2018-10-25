@@ -28,7 +28,7 @@ class VacacioneController extends Controller
 
   protected $nombre_modulo = "Talento Humano";
 
-    public function All_Vacacione(Request $request)
+    public function All_Vacacione(Request $request,$sede=null)
     {
         //
        
@@ -40,6 +40,11 @@ class VacacioneController extends Controller
           $data_filtro1="";
         $data_filtro2="";
       $Centros_trabajos = Centros_trabajo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+      $menu ="layouts.menu.thumano.admin";
+         if($sede){
+          $this->nombre_modulo="Sedes";
+          $menu ="layouts.menu.sedes.admin";
+        }
 if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
              $data_filtro1=$request["nombre_campo"];
           $campo=$request["busquedad"];
@@ -52,6 +57,19 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
             ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+            
+            if($sede){
+
+               $Vacaciones =Vacacione::select("*")
+            ->join("pyme_empleados","pyme_vacaciones.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.nombres", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
         }
         else if($request["nombre_campo"]=="idcargo"||$request["nombre_campo"]== "idcentro"){
           $campo="";
@@ -70,6 +88,16 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
             ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+            if($sede){
+
+               $Vacaciones =Vacacione::select("*")
+            ->join("pyme_empleados","pyme_vacaciones.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
+            ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
         }
 
           else if($request["nombre_campo"]=="documento" && isset($request["busquedad"])==true){
@@ -83,6 +111,17 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
 
+
+            if($sede){
+
+               $Vacaciones =Vacacione::select("*")
+            ->join("pyme_empleados","pyme_vacaciones.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
+
         }
 
 
@@ -90,20 +129,20 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             $Vacaciones =Vacacione::where("id",">",0)
             ->where('id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+            if($sede){
+
+               $Vacaciones =Vacacione::select("*")
+            ->join("pyme_empleados","pyme_vacaciones.idempleado","=","pyme_empleados.idempleado")
+            ->where('pyme_vacaciones.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+            }
         }
-        /*if($request["busquedad"]){
-            $Vacaciones = Vacacione::where("fecha_desde",">=",$request["busquedad"])
-            ->where("fecha_hasta","<=",$request["busquedad"])
-            ->where('id_establecimiento', '=', $user->id_establecimiento)
-            ->paginate(10);
-        }else{
-            $Vacaciones = Vacacione::where("id",">",0)
-            ->where('id_establecimiento', '=', $user->id_establecimiento)
-            ->paginate(10);
-        }*/
+
        
          return view('thumano.Vacaciones.home', array("Vacaciones"=>$Vacaciones,"title_menu"=>"Vacacione",
-            "title"=>"Vacaciones","user"=>$user,"Modulos"=>$modulos,"cargos"=>$cargos,
+            "title"=>"Vacaciones","user"=>$user,"Modulos"=>$modulos,"cargos"=>$cargos,"sede"=>$sede,"menu"=>$menu,
             "Centros_trabajos"=>$Centros_trabajos,"data_filtro1"=>$data_filtro1,"data_filtro2"=>$data_filtro2,
             "nombre_modulo"=>$this->nombre_modulo)); 
     }
@@ -130,7 +169,15 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            }
  			
           $elemento1->save();
-         return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correctamente");
+
+          if($sede){
+return redirect('/All_Vacacione/Sede')->with('status', "Elemento Actualizado Correctamente");
+            }else{
+return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correctamente");
+            }
+      
+    
+         
 
     }
 
@@ -163,13 +210,20 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            'documento_cargar'=>$storage_name
         ]);
 
-        return redirect('/All_Vacacione')->with('status', "Elemento Creado Correctamente");
+         if($sede){
+   return redirect('/All_Vacacione/Sede')->with('status', "Elemento Creado Correctamente");
+            }else{
+   return redirect('/All_Vacacione')->with('status', "Elemento Creado Correctamente");
+            }
+      
+    
+     
     }
 
 
 
 
-    public function formulario_Vacacione($id,$ruta)
+    public function formulario_Vacacione($id,$ruta,$sede=null)
     {
         //
         	
@@ -177,8 +231,15 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $user = User::find(Auth::user()->id_usuario);
            $estilo="";
         $elemento="";
-        $Empleados=Empleado::all();
+         $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)->get();
         $tipos_nomina = Tipos_nomina::all();
+         $menu ="layouts.menu.thumano.admin";
+         if($sede){
+          $this->nombre_modulo="Sedes";
+          $menu ="layouts.menu.sedes.admin";
+           $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)
+                ->where("idcentro","=",$user->idcentro)->get();
+        }
         if($ruta=="actualizar"){
           $ruta ="Vacacione_update";
            $elemento =Vacacione::find($id);
@@ -206,7 +267,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
         }
 
       return view('thumano.Vacaciones.formulario', array('elemento' => $elemento,"id"=>$id,"ruta"=>$ruta,"user"=>$user,"Modulos"=>$modulos,
-        "estilo"=>$estilo,"tipos_nomina"=>$tipos_nomina,
+        "estilo"=>$estilo,"tipos_nomina"=>$tipos_nomina,"sede"=>$sede,"menu"=>$menu,
         "Empleados"=>$Empleados,
             "nombre_modulo"=>$this->nombre_modulo));
        
@@ -216,7 +277,14 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
  public function delete_Vacacione($id)
     {
       Vacacione::destroy($id);
-      return redirect('/All_Vacacione')->with('status', "Elemento Eliminado Correctamente");
+      if($sede){
+return redirect('/All_Vacacione/Sede')->with('status', "Elemento Eliminado Correctamente");
+            }else{
+return redirect('/All_Vacacione')->with('status', "Elemento Eliminado Correctamente");
+            }
+      
+    
+     
     }
 
 

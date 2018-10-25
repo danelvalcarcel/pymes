@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include("layouts.menu.thumano.admin")
+@include($menu)
 <div class="main-content">
     <div class="main-content-inner">
         <div class="col-md-12">
@@ -27,6 +27,10 @@
             <form id="form_sueldo" enctype="multipart/form-data" action="{{ route($ruta)}}" method="post">
                  {{ csrf_field() }}
                 <div class="row">
+                          @if($sede)
+                            <input type="hidden" name="sede" value="{{$sede}}" >
+                            @else
+                            @endif
 
 
 
@@ -180,7 +184,7 @@
                                               <select  id="idempleado_{{$i}}" class="form-control" name="idempleado_{{$i}}" >
                                                     <option value="0">Selecciona una opcion</option>}
                                                     option
-                                                    @foreach($Empleados as $data)
+                                                    @foreach($Empleados2 as $data)
                                                     <option value="{{$data->idempleado}}">{{$data->nombres}} {{$data->apellidos}}</option>
                                                     @endforeach
                                                 </select>

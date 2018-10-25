@@ -26,7 +26,7 @@ class EventoController extends Controller
   
   protected $nombre_modulo = "Talento Humano";
 
-    public function All_Evento(Request $request)
+    public function All_Evento(Request $request, $sede=null)
     {
         //
        
@@ -38,6 +38,11 @@ class EventoController extends Controller
           $data_filtro1="";
         $data_filtro2="";
       $Centros_trabajos = Centros_trabajo::where('id_establecimiento', '=', $user->id_establecimiento)->get();
+       $menu ="layouts.menu.thumano.admin";
+         if($sede){
+          $this->nombre_modulo="Sedes";
+          $menu ="layouts.menu.sedes.admin";
+        }
 if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
              $data_filtro1=$request["nombre_campo"];
           $campo=$request["busquedad"];
@@ -50,6 +55,18 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
             ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+             if($sede){
+              $Eventos =Evento::select("*")
+            ->join("pyme_empleados","pyme_eventos.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.nombres", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->orWhere("pyme_empleados.apellidos", 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+             }
         }
         else if($request["nombre_campo"]=="idcargo"||$request["nombre_campo"]== "idcentro"){
           $campo="";
@@ -68,6 +85,16 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
             ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+
+            if($sede){
+               $Eventos =Evento::select("*")
+            ->join("pyme_empleados","pyme_eventos.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], '=',   $campo)
+            ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+             }
         }
 
           else if($request["nombre_campo"]=="documento" && isset($request["busquedad"])==true){
@@ -81,6 +108,16 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
 
+
+            if($sede){
+               $Eventos =Evento::select("*")
+            ->join("pyme_empleados","pyme_eventos.idempleado","=","pyme_empleados.idempleado")
+            ->where("pyme_empleados.".$request["nombre_campo"], 'like', '%' . $request["busquedad"] . '%')
+            ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+             }
+
         }
 
 
@@ -88,6 +125,15 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             $Eventos =Evento::where("idevento",">",0)
             ->where('id_establecimiento', '=', $user->id_establecimiento)
             ->paginate(10);
+
+
+            if($sede){
+               $Eventos =Evento::select("*")
+            ->join("pyme_empleados","pyme_eventos.idempleado","=","pyme_empleados.idempleado")
+            ->where('pyme_eventos.id_establecimiento', '=', $user->id_establecimiento)
+            ->where("pyme_empleados.idcentro", '=',$user->idcentro)
+            ->paginate(10);
+             }
         }
        
         /*if($request["busquedad"]){
@@ -104,7 +150,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
          return view('thumano.Eventos.home', array("Eventos"=>$Eventos,"title_menu"=>"Evento",
             "title"=>"Eventos","user"=>$user,"Modulos"=>$modulos,
             "nombre_modulo"=>$this->nombre_modulo,"cargos"=>$cargos,
-            "Centros_trabajos"=>$Centros_trabajos,
+            "Centros_trabajos"=>$Centros_trabajos,"sede"=>$sede,"menu"=>$menu,
 "data_filtro1"=>$data_filtro1,"data_filtro2"=>$data_filtro2)); 
     }
 
@@ -137,7 +183,13 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
                 'idempleado'=>$request['idempleado_'.$x]]);
             }
           }
+
+          if($request['sede']){
+          return redirect('/All_Evento/Sede')->with('status', "Elemento Actualizado Correctamente");
+         }else{
          return redirect('/All_Evento')->with('status', "Elemento Actualizado Correctamente");
+         }
+         
 
     }
 
@@ -176,13 +228,19 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
             }
           }
 
+
+          if($request['sede']){
+          return redirect('/All_Evento/Sede')->with('status', "Elemento Creado Correctamente");
+         }else{
         return redirect('/All_Evento')->with('status', "Elemento Creado Correctamente");
+         }
+        
     }
 
 
 
 
-    public function formulario_Evento($id,$ruta)
+    public function formulario_Evento($id,$ruta, $sede=null)
     {
         //
         	
@@ -190,8 +248,16 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $user = User::find(Auth::user()->id_usuario);
            $estilo="";
         $elemento="";
-        $Empleados=Empleado::all();
+         $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)->get();
         $tipos_nomina = Tipos_nomina::all();
+         $menu ="layouts.menu.thumano.admin";
+
+        if($sede){
+          $this->nombre_modulo="Sedes";
+          $menu ="layouts.menu.sedes.admin";
+           $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)
+                ->where("idcentro","=",$user->idcentro)->get();
+        }
         if($ruta=="actualizar"){
           $ruta ="Evento_update";
            $elemento =Evento::find($id);
@@ -211,6 +277,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
           $elemento1->forma="";
           $elemento1->idevento="";
           $elemento1->nombre="";
+          $elemento1->empleados=[];
           
           
           $elemento = $elemento1;
@@ -222,7 +289,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
 
       return view('thumano.Eventos.formulario', array('elemento' => $elemento,"id"=>$id,"ruta"=>$ruta,"user"=>$user,"Modulos"=>$modulos,
         "estilo"=>$estilo,"tipos_nomina"=>$tipos_nomina,
-        "Empleados"=>$Empleados,
+        "Empleados2"=>$Empleados,"sede"=>$sede,"menu"=>$menu,
             "nombre_modulo"=>$this->nombre_modulo));
        
     }
@@ -231,6 +298,12 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
  public function delete_Evento($id)
     {
       Evento::destroy($id);
+
+      if($request['sede']){
+          return redirect('/All_Evento/Sede')->with('status', "Elemento Eliminado Correctamente");
+         }else{
       return redirect('/All_Evento')->with('status', "Elemento Eliminado Correctamente");
+         }
+      
     }
 }

@@ -431,10 +431,6 @@ class EmpleadoController extends Controller
           $elemento1->logo="";
           $elemento1->tipocontrato="";
           $elemento1->tipodocumento="";
-
-
-          
-          
           $elemento = $elemento1;
         }else{
            $ruta ="All_Empleado";

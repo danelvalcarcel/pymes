@@ -21,7 +21,7 @@ class User extends Authenticatable
     protected $fillable = [
        'correo', 'clave', 'nombres', 'mobile', 'roleid', 'isDeleted',
         'createdBy', 'createdDtm', 'updatedBy', 'updatedDtm',
-         'id_establecimiento', 'login', 'role', 'estado',"modulos_id"
+         'id_establecimiento', 'login', 'role', 'estado',"modulos_id","idcentro"
     ];
 
     /**

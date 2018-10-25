@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include("layouts.menu.thumano.admin")
+@include($menu)
 <div class="main-content">
     <div class="main-content-inner">
         <div class="col-md-12">
@@ -29,7 +29,10 @@
                 <div class="row">
 
 
-
+                            @if($sede)
+                            <input type="hidden" name="sede" value="{{$sede}}" >
+                            @else
+                            @endif
 
 
 

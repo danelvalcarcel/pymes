@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include("layouts.menu.thumano.admin")
+@include($menu)
 <div class="main-content">
     <div class="main-content-inner">
         <div class="col-md-12">
@@ -14,7 +14,12 @@
                     @endif
                 <div class="panel-heading">
                     <div style="display: inline-block;">
-                    <a class="btn btn-info" href="{{route('formulario_Incapacidade',['id'=>0, 'ruta'=>'crear'])}}"><i class="glyphicon glyphicon-plus"></i></a>
+                        @if($sede)
+                        <a class="btn btn-info" href="{{route('formulario_Incapacidade',['id'=>0, 'ruta'=>'crear','sede'=>'Sede'])}}"><i class="glyphicon glyphicon-plus"></i></a>
+                        @else
+                        <a class="btn btn-info" href="{{route('formulario_Incapacidade',['id'=>0, 'ruta'=>'crear'])}}"><i class="glyphicon glyphicon-plus"></i></a>
+                        @endif
+                    
                     </div>
                     <div style="font-size: 20px; display: inline-block; height: 100%; vertical-align: middle;">{{$title}}</div>
                 </div>
@@ -50,9 +55,18 @@
                                     @endforeach
                                 </select>
                             </div>
+                            @if($sede)
+                            <input type="hidden" name="sede_expor" value="{{$sede}}" >
+                            @else
+                            @endif
                             <div class="col-sm-6" style="padding: 0 20px 0 20px">
                                 <input class="btn btn-success col-sm-3" type="submit" name="enviar" value="Buscar">
+                                @if($sede)
+                                <a class="btn btn-info col-sm-3" href="{{url('All_Incapacidade',['sede'=>'Sede'])}}" value="Borrar filtros">Borrar Filtro</a>
+                                @else
                                 <a class="btn btn-info col-sm-3" href="{{url('All_Incapacidade')}}" value="Borrar filtros">Borrar Filtro</a>
+                                @endif
+                                
                                 <input type="hidden" name="reporte" id="reporte" value="">
                                 <input id="pdf_export" class="btn btn-danger col-sm-3" type="submit" name="PDF" value="PDF">
                                 <input id="excel_export" class="btn btn-success col-sm-3" type="submit" name="EXCEL" value="EXCEL">
@@ -91,6 +105,10 @@
                             <td style="text-align: center;">
                                 <form action="{{route('delete_Incapacidade',['id'=>$Incapacidade->id])}}" method="POST">
                                    {{-- method_field('DELETE') --}} {{ csrf_field() }}
+                                    @if($sede)
+                                        <input type="hidden" name="sede" value="{{$sede}}" >
+                                        @else
+                                        @endif
                                     <input title="Eliminar Elemento" onclick="return confirm('Desea Eliminar el Registro?')" type="submit"  class="glyphicon glyphicon-trash btn btn-xs btn-danger" name="Eliminar" value="Eliminar"></form>
                                 </td>
                             </tr>

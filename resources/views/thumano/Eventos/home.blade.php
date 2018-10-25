@@ -2,7 +2,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include("layouts.menu.thumano.admin")
+@include($menu)
 <div class="main-content">
     <div class="main-content-inner">
         <div class="col-md-12">
@@ -14,7 +14,13 @@
                     @endif
                 <div class="panel-heading">
                     <div style="display: inline-block;">
+
+                        @if($sede)
+                        <a class="btn btn-info" href="{{route('formulario_Evento',['id'=>0, 'ruta'=>'crear','sede'=>'Sede'])}}"><i class="glyphicon glyphicon-plus"></i></a>
+                        @else
                     <a class="btn btn-info" href="{{route('formulario_Evento',['id'=>0, 'ruta'=>'crear'])}}"><i class="glyphicon glyphicon-plus"></i></a>
+                        @endif
+                    
                     </div>
                     <div style="font-size: 20px; display: inline-block; height: 100%; vertical-align: middle;">{{$title}}</div>
                 </div>
@@ -49,11 +55,21 @@
                                     <option value="{{$data->idcentro}}">{{$data->nombre}}</option>
                                     @endforeach
                                 </select>
+
+                                 @if($sede)
+                                    <input type="hidden" name="sede_expor" value="{{$sede}}" >
+                                    @else
+                                    @endif
                             </div>
                             <div class="col-sm-6" style="padding: 0 20px 0 20px">
                                 <input class="btn btn-success col-sm-3" type="submit" name="enviar" value="Buscar">
                                 <div style="display: none">
-                                <a class="btn btn-info col-sm-3" href="{{url('All_Incapacidade')}}" value="Borrar filtros">Borrar Filtro</a>
+                                     @if($sede)
+                                <a class="btn btn-info col-sm-3" href="{{url('All_Evento',['sede'=>'Sede'])}}" value="Borrar filtros">Borrar Filtro</a>
+                                @else
+                                <a class="btn btn-info col-sm-3" href="{{url('All_Evento')}}" value="Borrar filtros">Borrar Filtro</a>
+                                @endif
+                                
                                 <input type="hidden" name="reporte" id="reporte" value="">
                                 <input id="pdf_export" class="btn btn-danger col-sm-3" type="submit" name="PDF" value="PDF">
                                 <input id="excel_export" class="btn btn-success col-sm-3" type="submit" name="EXCEL" value="EXCEL">
