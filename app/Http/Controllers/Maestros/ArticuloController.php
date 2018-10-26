@@ -66,7 +66,7 @@ class ArticuloController extends Controller
            $elemento1->codigo =$request["codigo"];
           $elemento1->id_categoria =$request["id_categoria"];
           $elemento1->valor_costo =$request["valor_costo"];
-          $elemento1->valor_venta =$request["valor_venta"];
+          $elemento1->valor_venta =1;
           $elemento1->porcentaje_descuento =$request["porcentaje_descuento"];
           $elemento1->updatedDtm =date('Y-m-d H:i:s');
           $elemento1->updatedby =$user->id_usuario;
@@ -105,7 +105,7 @@ class ArticuloController extends Controller
            'nombre'=>$request["nombre"],
             'id_categoria'=>$request["id_categoria"],
              'valor_costo'=>$request["valor_costo"],
-      		'valor_venta'=>$request["valor_venta"],
+      		'valor_venta'=>1,
       		 'isDeleted'=>$request["isDeleted"],
       		  'createdBy'=>$user->id_usuario,
       		  'createdDtm'=>date('Y-m-d H:i:s'),

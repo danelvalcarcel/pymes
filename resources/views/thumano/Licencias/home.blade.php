@@ -99,7 +99,12 @@
                               <td>{{$Licencia->fecha_hasta}}</td>
                               <td>{{$Licencia->estado}}</td>
                             <td style="text-align: center;"><a title="Ver Elemento" href="{{route('formulario_Licencia',['id'=>$Licencia->id, 'ruta'=>'ver'])}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-                            <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Licencia',['id'=>$Licencia->id, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            
+                                        @if($sede)
+                                        <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Licencia',['id'=>$Licencia->id, 'ruta'=>'actualizar','sede'=>'Sede'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                        @else
+                                        <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Licencia',['id'=>$Licencia->id, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                        @endif
                             <td style="text-align: center;">
                                 <form action="{{route('delete_Licencia',['id'=>$Licencia->id])}}" method="POST">
                                    {{-- method_field('DELETE') --}} {{ csrf_field() }}

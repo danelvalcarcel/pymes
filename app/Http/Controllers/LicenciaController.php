@@ -16,7 +16,7 @@ use App\Empleado;
 use App\Enfermedade;
 use App\Empleadosdocumentos;
 use App\Empleadospersonas;
-use App\TipoLicencia;
+use App\TipoMotivo;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -159,7 +159,9 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $elemento1->idtipolicencia=$request['idtipolicencia'];
            $elemento1->remunerada=$request['remunerada'];
            $elemento1->observacion=$request['observacion'];
-           $elemento1->estado=$request['estado'];
+            if(isset($request['estado'])){
+             $elemento1->estado=$request['estado'];
+           }
            
            //$elemento1->id_establecimiento=>$user->id_establecimiento;
            if($request["documento_licencia"]){
@@ -168,7 +170,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            }
  			
           $elemento1->save();
-          if($sede){
+          if($request['sede']){
  return redirect('/All_Licencia/Sede')->with('status', "Elemento Actualizado Correctamente");
             }else{
  return redirect('/All_Licencia')->with('status', "Elemento Actualizado Correctamente");
@@ -193,6 +195,10 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
        	if($request["documento_licencia"]){
            	$storage_name =Storage::disk('public_incapacidades')->put('/', $request["documento_licencia"]);
            }
+           $estado ="No Aprobado";
+            if(isset($request['estado'])){
+              $estado =$request['estado'];
+            }
          Licencia::create([
            'idempleado'=>$request['idempleado'],
            'documento'=>$request['documento'],
@@ -202,12 +208,12 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            'fecha_hasta'=>$request['fecha_hasta'],
            'idtipolicencia'=>$request['idtipolicencia'],
            "remunerada"=>$request['remunerada'],
-           "estado"=>$request['estado'],
+           "estado"=>$estado,
            'id_establecimiento'=>$user->id_establecimiento,
            'documento_licencia'=>$storage_name
         ]);
 
-         if($sede){
+         if($request['sede']){
 return redirect('/All_Licencia/Sede')->with('status', "Elemento Creado Correctamente");
             }else{
 return redirect('/All_Licencia')->with('status', "Elemento Creado Correctamente");
@@ -223,12 +229,13 @@ return redirect('/All_Licencia')->with('status', "Elemento Creado Correctamente"
         //
         	
           $modulos = Modulos::all();
-          $Enfermedades =TipoLicencia::all();
+          $Enfermedades =TipoMotivo::all();
            $user = User::find(Auth::user()->id_usuario);
            $estilo="";
         $elemento="";
         $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)->get();
         $tipos_nomina = Tipos_nomina::all();
+         $menu ="layouts.menu.thumano.admin";
           if($sede){
           $this->nombre_modulo="Sedes";
           $menu ="layouts.menu.sedes.admin";
@@ -269,10 +276,10 @@ return redirect('/All_Licencia')->with('status', "Elemento Creado Correctamente"
     }
 
 
- public function delete_Licencia($id)
+ public function delete_Licencia(Request $request, $id)
     {
       Licencia::destroy($id);
-      if($sede){
+       if($request['sede']){
 return redirect('/All_Licencia/Sede')->with('status', "Elemento Eliminado Correctamente");
             }else{
 return redirect('/All_Licencia')->with('status', "Elemento Eliminado Correctamente");

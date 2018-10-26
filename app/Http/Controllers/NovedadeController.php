@@ -438,7 +438,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
     }
 
 
- public function delete_Novedade($id)
+ public function delete_Novedade(Request $request, $id)
     {
       Novedade::destroy($id);
       if($request['sede']){

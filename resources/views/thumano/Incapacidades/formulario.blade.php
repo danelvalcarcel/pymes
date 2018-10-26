@@ -117,8 +117,11 @@
                     </div>
                 </div>
 
-
-                <div class="col-md-12" style="margin-top: 20px">
+                
+                             @if($sede)
+                            
+                            @else
+                            <div class="col-md-12" style="margin-top: 20px">
                     <div class="col-md-4">
                        <label class="form-control" style="border:none" for="estado">Estado</label>
                     </div>
@@ -126,10 +129,15 @@
                         <select class="form-control" name="estado" id="estado">
                             <option value="No Aprobado">No Aprobado</option>
                             <option value="Aprobado">Aprobada</option>
+                            <option value="Rechazado">Rechazado</option>
                             
                         </select>
                     </div>
                 </div>
+
+                            @endif
+
+                
 
                 
                 <div class="col-md-12" style="margin-top: 20px">

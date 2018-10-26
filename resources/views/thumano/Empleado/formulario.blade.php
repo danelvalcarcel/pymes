@@ -108,6 +108,15 @@
 
                 <div class="col-md-6" style="margin-top: 20px">
                     <div class="col-md-4">
+                       <label class="form-control" style="border:none" for="email">Email</label>
+                    </div>
+                    <div class="col-md-8">
+                        <input required class="form-control" id="email" type="text" name="email" value="{{$elemento->email}}"  >
+                    </div>
+                </div>
+
+                <div class="col-md-6" style="margin-top: 20px">
+                    <div class="col-md-4">
                        <label class="form-control" style="border:none" for="direccion">Direccion</label>
                     </div>
                     <div class="col-md-8">

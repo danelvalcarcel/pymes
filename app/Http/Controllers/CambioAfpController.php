@@ -125,6 +125,8 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $elemento1->remunerada=$request['remunerada'];
            $elemento1->observacion=$request['observacion'];
            $elemento1->idafp=$request['idafp'];
+
+
            
            //$elemento1->id_establecimiento=>$user->id_establecimiento;
            if($request["documento_cargar"]){
@@ -133,6 +135,10 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            }
  			
           $elemento1->save();
+
+          $Empleados=Empleado::find($request['idempleado']);
+         $Empleados->liquidarpension =$request['idafp'];
+         $Empleados->save();
          return redirect('/All_CambioAfp')->with('status', "Elemento Actualizado Correctamente");
 
     }
@@ -166,6 +172,10 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            'documento_cargar'=>$storage_name
         ]);
 
+         $Empleados=Empleado::find($request['idempleado']);
+         $Empleados->liquidarpension =$request['idafp'];
+         $Empleados->save();
+
         return redirect('/All_CambioAfp')->with('status', "Elemento Creado Correctamente");
     }
 
@@ -182,7 +192,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $user = User::find(Auth::user()->id_usuario);
            $estilo="";
         $elemento="";
-        $Empleados=Empleado::all();
+       $Empleados=Empleado::where('id_establecimiento', '=', $user->id_establecimiento)->get();
         $tipos_nomina = Tipos_nomina::all();
         if($ruta=="actualizar"){
           $ruta ="CambioAfp_update";

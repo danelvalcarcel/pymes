@@ -71,7 +71,7 @@
                                     <option value="0">Selecciona una opcion</option>}
                                     option
                                     @foreach($Enfermedades as $data)
-                                    <option value="{{$data->idtipolicencia}}">{{$data->nombre}}</option>
+                                    <option value="{{$data->idtipomotivo}}">{{$data->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -131,7 +131,11 @@
                     </div>
                 </div>
 
-                <div class="col-md-12" style="margin-top: 20px">
+
+                 @if($sede)
+                            
+                            @else
+                            <div class="col-md-12" style="margin-top: 20px">
                     <div class="col-md-4">
                        <label class="form-control" style="border:none" for="estado">Estado</label>
                     </div>
@@ -139,10 +143,14 @@
                         <select class="form-control" name="estado" id="estado">
                             <option value="No Aprobado">No Aprobado</option>
                             <option value="Aprobado">Aprobada</option>
+                            <option value="Rechazado">Rechazado</option>
                             
                         </select>
                     </div>
                 </div>
+
+                            @endif
+
 
 
                 @if($elemento->documento_licencia != "")

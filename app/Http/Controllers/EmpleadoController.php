@@ -217,6 +217,7 @@ class EmpleadoController extends Controller
             $elemento1->liquidarpension=$request['liquidarpension'];
             $elemento1->idcargo=$request['idcargo'];
             $elemento1->genero=$request['genero'];
+            $elemento1->email=$request['email'];
             $elemento1->idempresa=$user->id_establecimiento;
             $elemento1->nivelestudios=$request['nivelestudios'];
             $elemento1->idprofesion=0;
@@ -312,6 +313,7 @@ class EmpleadoController extends Controller
             'idprofesion'=>0,
             'id_establecimiento'=>$user->id_establecimiento,
             "sueldo"=>$request['sueldo'],
+            "email"=>$request['email'],
             "talla_camisa"=>$request['talla_camisa'],
             "talla_pantalon"=>$request['talla_pantalon'],
             "talla_zapatos"=>$request['talla_zapatos'],
@@ -429,6 +431,7 @@ class EmpleadoController extends Controller
           $elemento1->talla_zapatos="";
           $elemento1->rh="";
           $elemento1->logo="";
+          $elemento1->email="";
           $elemento1->tipocontrato="";
           $elemento1->tipodocumento="";
           $elemento = $elemento1;

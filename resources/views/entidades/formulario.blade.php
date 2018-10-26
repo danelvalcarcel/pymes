@@ -141,7 +141,7 @@
 
                         <div class="col-md-12" style="margin-top: 10px">
                             <div class="col-md-4">
-                            <label for="id_erp"  class="col-md-4 form-control" style="border:none">Erp</label>
+                            <label for="id_erp"  class="col-md-4 form-control" style="border:none">Arl</label>
                              </div>
 
                             <div class="col-md-6">

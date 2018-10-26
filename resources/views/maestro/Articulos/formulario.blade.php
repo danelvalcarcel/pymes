@@ -107,22 +107,13 @@
 
                 <div class="col-md-6"  style="margin-top: 20px">
                     <div class="col-md-6">
-                       <label class="form-control" style="border:none" for="valor_total">Valor Total</label>
+                       <label class="form-control" style="border:none" for="valor_total">Precio De Compra Total</label>
                     </div>
                     <div class="col-md-6">
-                        <input  required class="form-control" id="valor_total" type="text" name="valor_total" value="{{substr($elemento->valor_total,0,-3)}}" >
+                        <input style="background-color: #87B87F;"  required class="form-control" id="valor_total" type="text" name="valor_total" value="{{substr($elemento->valor_total,0,-3)}}" >
                     </div>
                 </div>
 
-
-                <div class="col-md-6"  style="margin-top: 20px">
-                    <div class="col-md-6">
-                       <label class="form-control" style="border:none" for="valor_venta">Valor Venta</label>
-                    </div>
-                    <div class="col-md-6">
-                        <input required class="form-control" id="valor_venta" type="text" name="valor_venta" value="{{substr($elemento->valor_venta,0,-3)}}" >
-                    </div>
-                </div>
 
 
                  <div class="col-md-6"  style="margin-top: 20px">
@@ -150,7 +141,7 @@
                        <label class="form-control" style="border:none" for="porcentaje_descuento">Porcentaje Descuento</label>
                     </div>
                     <div class="col-md-6">
-                        <input  required class="form-control" id="porcentaje_descuento" type="number" name="porcentaje_descuento" value="{{$elemento->porcentaje_descuento}}" >
+                        <input style="background-color: #87B87F;"  required class="form-control" id="porcentaje_descuento" type="number" name="porcentaje_descuento" value="{{$elemento->porcentaje_descuento}}" >
                     </div>
                 </div>
 
@@ -163,15 +154,17 @@
                     </div>
                 </div>
 
-
+               
                 <div class="col-md-6"  style="margin-top: 20px">
                     <div class="col-md-6">
                        <label class="form-control" style="border:none" for="precio1">Precio Publico</label>
                     </div>
                     <div class="col-md-6">
-                        <input required class="form-control" id="precio1" type="text" name="precio1" value="{{substr($elemento->precio1,0,-3)}}"  >
+                        <input style="background-color: #87B87F;" required class="form-control" id="precio1" type="text" name="precio1" value="{{substr($elemento->precio1,0,-3)}}"  >
                     </div>
                 </div>
+
+
 
 
                 <div class="col-md-6"  style="margin-top: 20px">
@@ -179,7 +172,7 @@
                        <label class="form-control" style="border:none" for="precio2">Precio Distribuidor</label>
                     </div>
                     <div class="col-md-6">
-                        <input required class="form-control" id="precio2" type="text" name="precio2" value="{{substr($elemento->precio2,0,-3)}}"  >
+                        <input style="background-color: #87B87F;" required class="form-control" id="precio2" type="text" name="precio2" value="{{substr($elemento->precio2,0,-3)}}"  >
                     </div>
                 </div>
 
@@ -189,7 +182,7 @@
                        <label class="form-control" style="border:none" for="precio3">Precio Especial</label>
                     </div>
                     <div class="col-md-6">
-                        <input required class="form-control" id="precio3" type="text" name="precio3" value="{{substr($elemento->precio3,0,-3)}}"  >
+                        <input style="background-color: #87B87F;" required class="form-control" id="precio3" type="text" name="precio3" value="{{substr($elemento->precio3,0,-3)}}"  >
                     </div>
                 </div>
         
@@ -272,8 +265,8 @@
         $("#id_categoria").val("{{$elemento->id_categoria}}")
         $("#id_medida").val("{{$elemento->id_medida}}")
         $("#porcentaje_descuento").on("change", function(){
-            if($(this).val() !== "" && $("#valor_venta").val()  !==""){
-                        var valor =$("#valor_venta").val() ;
+            if($(this).val() !== "" && $("#precio1").val()  !==""){
+                        var valor =$("#precio1").val() ;
                         var nuevo_val = valor.replace(".","").replace(".","").replace(".","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
                         var valor_descuento = parseFloat(nuevo_val)*(parseFloat($(this).val())/100);
                         $("#valor_descuento").val(valor_descuento)                      
@@ -286,7 +279,7 @@
                     }
 
         });
-            $("#valor_total, #valor_venta").on("change", function(){
+            $("#valor_total, #precio1").on("change", function(){
                     if($("#valor_total").val() !== ""){
                         var valor =$("#valor_total").val() ;
                         var nuevo_val = valor.replace(".","").replace(".","").replace(".","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
@@ -299,13 +292,14 @@
                         $("#valor_costo").val(valor_producto_sin_iva);
                         $("#valor_costo").keyup();
                     }
-                        if($("#valor_venta").val() !== ""){
+                        if($("#precio1").val() !== ""){
                             if($("#valor_total").val() !== ""){
-                        var valor =$("#valor_venta").val() ;
+                        var valor =$("#precio1").val() ;
                         var nuevo_val = valor.replace(".","").replace(".","").replace(".","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
                         var utilidad = parseFloat(nuevo_val) - parseFloat(nuevo_val)*0.19- valor_costo + valor_iva;
                         $("#utilidad").val(utilidad);
                         $("#utilidad").keyup();
+
                     }else{
                         alert("Ingrese el Costo del Producto")
                         $(this).val("")
@@ -360,11 +354,7 @@
            $("#valor_total").prop("type", "number");
            $("#valor_total").val(parseFloat(nuevo_val))
 
-            var valor =$("#valor_venta").val() ;
-           var nuevo_val = valor.replace(".","").replace(".","").replace(".","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
-           $("#valor_venta").prop("type", "number");
-           $("#valor_venta").val(parseFloat(nuevo_val))
-
+           
             var valor =$("#utilidad").val() ;
            var nuevo_val = valor.replace(".","").replace(".","").replace(".","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
            $("#utilidad").prop("type", "number");

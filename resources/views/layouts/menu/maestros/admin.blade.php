@@ -166,6 +166,7 @@
      <li><a tabindex="-1" href="">ELEMENTOS</a></li>
      <li><a tabindex="-1" href="{{route('All_Tipo_documento')}}">TIPOS DE DOCUMENTOS</a></li>
      <li><a tabindex="-1" href="{{route('All_Enfermedade')}}">TIPOS ENFERMEDADES</a></li>
+     <li><a tabindex="-1" href="{{route('All_Motivo')}}">TIPOS MOTIVOS</a></li>
      <li><a tabindex="-1" href="{{route('All_Profesione')}}">PROFESIONES</a></li>
      <li><a tabindex="-1" href="{{route('All_CajaCompensacion')}}">CAJA COMPENSACION</a></li>
           <li class="dropdown-submenu">

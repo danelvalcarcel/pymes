@@ -101,7 +101,7 @@ class MisArticuloController extends Controller
            $elemento1->codigo =$request["codigo"];
           $elemento1->id_categoria =$request["id_categoria"];
           $elemento1->valor_costo =$request["valor_costo"];
-          $elemento1->valor_venta =$request["valor_venta"];
+          $elemento1->valor_venta =1;
           $elemento1->porcentaje_descuento =$request["porcentaje_descuento"];
           $elemento1->updatedDtm =date('Y-m-d H:i:s');
           $elemento1->updatedby =$user->id_usuario;
@@ -120,7 +120,7 @@ class MisArticuloController extends Controller
           $elemento1->save();
           $prod = Producto::where("article_pyme","=",$request['id'])->get();
            Producto::where("article_pyme","=",$request['id'])
-          ->update((["nombre"=>$request["nombre"],"codigo"=>$request["codigo"],
+          ->update((["nombre"=>$request["nombre"],
           'categoria_id'=>$request["id_categoria"],
           "tamanio"=>1,'medida_id'=>$request["id_medida"],
                         "color"=>"Ninguno",
@@ -128,7 +128,7 @@ class MisArticuloController extends Controller
                         "estado"=>"Activo",
                         "descripcion"=>"Producto de Empresa",
                         "precio_costo"=>$request["valor_costo"],
-                        "precio_venta"=>$request["valor_venta"],
+                        "precio_venta"=>1,
                         "precio1"=>$request["precio1"],
                         "precio2"=>$request["precio2"],
                         "precio3"=>$request["precio3"],
@@ -165,7 +165,7 @@ class MisArticuloController extends Controller
            'nombre'=>$request["nombre"],
             'id_categoria'=>$request["id_categoria"],
              'valor_costo'=>$request["valor_costo"],
-      		'valor_venta'=>$request["valor_venta"],
+      		'valor_venta'=>1,
       		 'isDeleted'=>$request["isDeleted"],
       		  'createdBy'=>$user->id_usuario,
       		  'createdDtm'=>date('Y-m-d H:i:s'),
@@ -188,8 +188,8 @@ class MisArticuloController extends Controller
               "valor_total"=>$request["valor_total"],
            				'id_establecimiento'=>$user->id_establecimiento
         ]);
-
-        $produc= Producto::create(["nombre"=>$request["nombre"],"codigo"=>$request["codigo"],
+         $codigo ="Producto-".$articulo_creado->id;
+        $produc= Producto::create(["nombre"=>$request["nombre"],"codigo"=>$codigo,
           'categoria_id'=>$request["id_categoria"],
           "tamanio"=>1,'medida_id'=>$request["id_medida"],
                         "color"=>"Ninguno",
@@ -197,7 +197,7 @@ class MisArticuloController extends Controller
                         "estado"=>"Activo",
                         "descripcion"=>"Producto de Empresa",
                         "precio_costo"=>$request["valor_costo"],
-                        "precio_venta"=>$request["valor_venta"],
+                        "precio_venta"=>1,
                         "precio1"=>$request["precio1"],
                         "precio2"=>$request["precio2"],
                         "precio3"=>$request["precio3"],
@@ -209,7 +209,7 @@ class MisArticuloController extends Controller
                         "article_pyme"=>$articulo_creado->id_articulo]);
 
           
-           Inventario::create(["codigo"=> $request["codigo"],
+           Inventario::create(["codigo"=> $codigo,
             'producto_id'=>$produc->id,"cantidad"=>$request["inicial"],'bodega_id'=>1,"estado"=>"Activo",
             "sucursale_id"=>1,"empresa_id"=>1,"id_establecimiento"=>$user->id_establecimiento]);
 

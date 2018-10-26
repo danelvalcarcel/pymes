@@ -2,15 +2,15 @@
 @extends('layouts.app')
 
 @section('content')
-@include($menu)
+@include('layouts.menu.maestros.admin')
 <div class="main-content">
     <div class="main-content-inner">
         <div class="col-md-12">
             <div class="panel panel-default">
 
-                <div class="panel-heading">
+            <div class="panel-heading">
                     <div style="font-size: 20px; display: inline-block; height: 100%; vertical-align: middle;">
-                        Vacaciones
+                        Motivo
                     </div>
                 </div>
                 @if ($errors->any())
@@ -27,123 +27,72 @@
             <form id="form_sueldo" enctype="multipart/form-data" action="{{ route($ruta)}}" method="post">
                  {{ csrf_field() }}
                 <div class="row">
-                             @if($sede)
-                            <input type="hidden" name="sede" value="{{$sede}}" >
-                            @else
-                            @endif
 
 
 
-
-
-
-
-
-                 <div class="col-md-12" style="margin-top: 20px">
-                            <div class="col-md-4">
-                            <label for="idempleado"  class="col-md-4 form-control" style="border:none">Empleado</label>
-                             </div>
-
-                            <div class="col-md-6">
-                                <select  id="idempleado" class="form-control" name="idempleado" >
-                                    <option value="0">Selecciona una opcion</option>
-                                    @foreach($Empleados as $data)
-                                    <option value="{{$data->idempleado}}">{{$data->nombres}} {{$data->apellidos}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                 </div>
-
-
-
-
-                 <div class="col-md-12" style="margin-top: 20px">
+                <div class="col-md-12" style="margin-top: 15px" >
                     <div class="col-md-4">
-                       <label class="form-control" style="border:none" for="fecha_desde">Fecha Desde</label>
+                       <label class="form-control" style="border:none" for="nombre">Nombre</label>
                     </div>
                     <div class="col-md-6">
-                        <input required class="form-control"  id="fecha_desde" type="date" name="fecha_desde"  value="{{$elemento->fecha_desde}}"  >
+                        <input required class="form-control" id="nombre" type="text" name="nombre" value="{{$elemento->nombre}}" >
                     </div>
                 </div>
 
 
-                <div class="col-md-12" style="margin-top: 20px">
+
+                <div class="col-md-12" style="margin-top: 15px" >
                     <div class="col-md-4">
-                       <label class="form-control" style="border:none" for="fecha_hasta">Fecha Hasta</label>
+                       <label class="form-control" style="border:none" for="codigo">Codigo</label>
                     </div>
                     <div class="col-md-6">
-                        <input required class="form-control"  id="fecha_hasta" type="date" name="fecha_hasta"  value="{{$elemento->fecha_hasta}}"  >
+                        <input required class="form-control" id="codigo" type="text" name="codigo" value="{{$elemento->codigo}}" >
                     </div>
                 </div>
+
+
+                <div class="col-md-12" style="margin-top: 15px" >
+                    <div class="col-md-4">
+                       <label class="form-control" style="border:none" for="descripcion">Descripcion</label>
+                    </div>
+                    <div class="col-md-6">
+                        <input required class="form-control" id="descripcion" type="text" name="descripcion" value="{{$elemento->descripcion}}" >
+                    </div>
+                </div>
+
+
 
                 
 
 
 
-                <div class="col-md-12" style="margin-top: 20px">
-                    <div class="col-md-4">
-                       <label class="form-control" style="border:none" for="forma">Forma</label>
-                    </div>
-                    <div class="col-md-6">
-                        <select class="form-control" name="forma" id="forma">
-                            <option value="1">Tiempo</option>
-                            <option value="0">Dinero</option>
-                            
-                        </select>
-                    </div>
-                </div>
+
+              
 
 
 
-                                 @if($sede)
-                            
-                            @else
-                            <div class="col-md-12" style="margin-top: 20px">
-                    <div class="col-md-4">
-                       <label class="form-control" style="border:none" for="estado">Estado</label>
-                    </div>
-                    <div class="col-md-6">
-                        <select class="form-control" name="estado" id="estado">
-                            <option value="No Aprobado">No Aprobado</option>
-                            <option value="Aprobado">Aprobada</option>
-                            <option value="Rechazado">Rechazado</option>
-                            
-                        </select>
-                    </div>
-                </div>
-
-                            @endif
 
 
-
-                <div class="col-md-12" style="margin-top: 20px">
-                    <div class="col-md-4">
-                       <label class="form-control" style="border:none" for="observacion">Observacion</label>
-                    </div>
-                    <div class="col-md-6">
-                        <textarea rows="5"  required class="form-control" id="observacion" name="observacion" >{{$elemento->observacion}}</textarea>
-                    </div>
-                </div>
-
-
+ 
+                        
                 
                     <div class="col-sm-12" style="padding-top: 30px">
-                                         @if($ruta =="Vacacione_update" )
+                                         @if($ruta =="Motivo_update" )
                                          <div class="col-sm-6">
                                          <input type="hidden" name="id" value="{{$id}}">
                                         <input type="submit" id="save_elemento" value="Actualizar" class="btn col-md-10 col-md-offset-1 btn-success" style="background: #a50029; color: #fff" >
                                         </div>
                                         <div class="col-sm-6">
-                                        <a href="{{route('All_Vacacione')}}" class="btn col-md-10 btn-warning col-md-offset-1 "  >
+                                        <a href="{{route('All_Motivo')}}" class="btn col-md-10 btn-warning col-md-offset-1 "  >
                                         Volver a Inicio
                                         </a>
                                         </div>
-                                       @elseif($ruta =="Vacacione_create" )
+                                       @elseif($ruta =="Motivo_create" )
                                        <div class="col-sm-6">
                                         <input type="submit" id="save_elemento" value="Crear" class="btn col-md-10 col-md-offset-1 btn-success" style="background: #a50029; color: #fff" >
                                         </div>
                                         <div class="col-sm-6">
-                                        <a href="{{route('All_Vacacione')}}" class="btn btn-warning col-md-10 col-md-offset-1 "  >
+                                        <a href="{{route('All_Motivo')}}" class="btn btn-warning col-md-10 col-md-offset-1 "  >
                                        Volver a Inicio
                                         </a>
                                         </div>
@@ -171,12 +120,7 @@
     $(document).ready(function($) {
         
        
-            $("#idtipoVacacione").val("{{$elemento->idtipoVacacione}}");
-            $("#idempleado").val("{{$elemento->idempleado}}");
-            $("#remunerada").val("{{$elemento->remunerada}}");
-            $("#forma").val("{{$elemento->forma}}");
-            $("#estado").val("{{$elemento->estado}}");
-            
+
          
 
 

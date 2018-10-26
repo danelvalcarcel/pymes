@@ -260,7 +260,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
     }
 
 
- public function delete_Retiro($id)
+ public function delete_Retiro(Request $request, $id)
     {
       Retiro::destroy($id);
        if($request['sede']){

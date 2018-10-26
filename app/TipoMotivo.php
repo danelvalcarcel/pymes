@@ -12,7 +12,7 @@ class TipoMotivo extends Model
     protected $primaryKey = 'idtipomotivo';
     public $timestamps = false;
     protected $fillable = [
-       'nombre',"descripcion","id_establecimiento"
+       'nombre',"descripcion","codigo","id_establecimiento"
     ];
 
 

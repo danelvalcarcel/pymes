@@ -217,7 +217,7 @@
                                 <div class="form-group {{ $errors->has('cupo') ? ' has-error' : '' }}">
                                     <label  id="milabel" for="tel_fijo" class="col-md-5 control-label">Cupo</label>
                                     <div class="col-md-7">
-                                        <input id="cupo" step="0.01" type="number" class="form-control" name="cupo" value="{{$elemento->cupo}}" required>
+                                        <input id="cupo" step="0.01" type="number" class="form-control" name="cupo" value="{{$elemento->cupo}}">
                                     </div>
 
                                 </div>
@@ -226,7 +226,7 @@
                                 <div class="form-group {{ $errors->has('Plazo') ? ' has-error' : '' }}">
                                     <label  id="milabel" for="observacion" class="col-md-3 control-label">Plazo</label>
                                     <div class="col-md-9">
-                                        <input id="plazo" type="number" class="form-control" name="plazo" value="{{$elemento->plazo }}" required>
+                                        <input id="plazo" type="number" class="form-control" name="plazo" value="{{$elemento->plazo }}" >
                                     </div>
 
                                 </div>
@@ -260,7 +260,7 @@
                                 <div class="form-group {{ $errors->has('mensualidad') ? ' has-error' : '' }}">
                                     <label  id="milabel" for="mensualidad" class="col-md-3 control-label">Mensualidad</label>
                                     <div class="col-md-9">
-                                        <input id="mensualidad" type="number" step="0.01" class="form-control" name="mensualidad" value="{{$elemento->mensualidad}}" required>
+                                        <input id="mensualidad" type="number" step="0.01" class="form-control" name="mensualidad" value="{{$elemento->mensualidad}}" >
                                     </div>
 
                                 </div>
@@ -323,5 +323,32 @@
          $("#municipio").val("{{$elemento->municipio}}");
          $("#tipo_cliente_id").val("{{$elemento->tipo_cliente_id}}");
             });
+
+
+
+
+         $("#cedula").on("change",function(e) {
+                e.preventDefault();
+                var cedula = $("#cedula").val();
+
+
+                    $.ajax({
+                        type:"Get",
+                        dataType:"json",
+                        url:"{{url('/')}}/Clientes"+"/"+ cedula+"/"+"{{ Auth::user()->id_establecimiento}}",
+                        success: function(resp){
+                            console.log(resp.length);
+                            if(resp.length===0){
+
+                            }
+                            var datos_cliente = resp[0];
+                            alert("Esta Cedula ya pertenece a un Cliente, El Señor(a) "+ datos_cliente["firts_name"] +" "+ datos_cliente["last_name"])
+                            $("#cedula").val("");
+
+                        }});
+
+                
+            });
+
         </script>
         @endsection

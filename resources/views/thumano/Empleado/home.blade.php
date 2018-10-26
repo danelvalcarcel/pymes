@@ -89,12 +89,12 @@
                             <td>{{number_format($empleado->sueldo, 0, ',', '.')}}</td>
                             <td style="text-align: center;"><a target="_blank" title="Descargar Certificado" href="{{route('Certificado_Empleado',['id'=>$empleado->idempleado])}}" class="btn btn-xs btn-default"><i class="glyphicon glyphicon-cloud-download"></i></a></td>
                             <td style="text-align: center;"><a target="_blank" title="Descargar Contrato" href="{{route('Certificado_Empleado',['id'=>$empleado->idempleado])}}" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-cloud-download"></i></a></td>
-                            <td style="text-align: center;"><a title="Ver Elemento" href="{{route('formulario_Empleado',['id'=>$empleado->idempleado, 'ruta'=>'ver'])}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-                            <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Empleado',['id'=>$empleado->idempleado, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            <td style="text-align: center;"><a title="Ver Empleado" href="{{route('formulario_Empleado',['id'=>$empleado->idempleado, 'ruta'=>'ver'])}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                            <td style="text-align: center;"><a title="Editar Empleado" href="{{route('formulario_Empleado',['id'=>$empleado->idempleado, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
                             <td style="text-align: center;">
                                 <form action="{{route('delete_Empleado',['id'=>$empleado->idempleado])}}" method="POST">
                                     {{ csrf_field() }}
-                                    <input title="Eliminar Elemento" onclick="return confirm('Desea Eliminar el Registro?')" type="submit"  class="glyphicon glyphicon-trash btn btn-xs btn-danger" name="Eliminar" value="Eliminar">
+                                    <input title="Eliminar Empleado" onclick="return confirm('Desea Eliminar el Empleado?')" type="submit"  class="glyphicon glyphicon-trash btn btn-xs btn-danger" name="Eliminar" value="Eliminar">
                                 </form>
                                 
                                 </td>

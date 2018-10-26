@@ -15,7 +15,7 @@ class Empleado extends Model
        'fecha_nacimiento', 'fecha_ingreso', 'fecha_terminacion', 'fondo', 'nombres',
         'apellidos', 'direccion', 'telefono', 'liquidarsalud', 'liquidarpension',
          'idcargo', 'genero', 'idempresa', 'nivelestudios', 'idprofesion',
-          'id_establecimiento',"sueldo","talla_camisa","talla_pantalon",
+          'id_establecimiento',"sueldo","talla_camisa","talla_pantalon","email",
           "talla_zapatos","rh","tipocontrato","tipodocumento","logo"
     ];
 

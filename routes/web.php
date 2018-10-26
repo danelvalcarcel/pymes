@@ -151,7 +151,11 @@ Route::get('/All_Eps', 'EpsController@All_Eps')->name('All_Eps');
 Route::post('/delete_Eps/{id}', 'EpsController@delete_Eps')->name('delete_Eps');
 
 
-
+Route::get('/formulario_Motivo/{id}/{ruta}/', 'Maestros\MotivoController@formulario_Motivo')->name('formulario_Motivo');
+Route::post('/Motivo_create', 'Maestros\MotivoController@Motivo_create')->name('Motivo_create');
+Route::post('/Motivo_update', 'Maestros\MotivoController@Motivo_update')->name('Motivo_update');
+Route::get('/All_Motivo', 'Maestros\MotivoController@All_Motivo')->name('All_Motivo');
+Route::post('/delete_Motivo/{id}', 'Maestros\MotivoController@delete_Motivo')->name('delete_Motivo');
 
 
 

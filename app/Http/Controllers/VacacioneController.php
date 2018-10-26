@@ -161,7 +161,9 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $elemento1->remunerada=$request['remunerada'];
            $elemento1->observacion=$request['observacion'];
            $elemento1->forma=$request['forma'];
-           $elemento1->estado=$request['estado'];
+            if(isset($request['estado'])){
+             $elemento1->estado=$request['estado'];
+           }
            
            //$elemento1->id_establecimiento=>$user->id_establecimiento;
            if($request["documento_cargar"]){
@@ -171,7 +173,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
  			
           $elemento1->save();
 
-          if($sede){
+          if($request['sede']){
 return redirect('/All_Vacacione/Sede')->with('status', "Elemento Actualizado Correctamente");
             }else{
 return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correctamente");
@@ -198,6 +200,11 @@ return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correcta
        	if($request["documento_cargar"]){
            	$storage_name =Storage::disk('public_incapacidades')->put('/', $request["documento_cargar"]);
            }
+
+           $estado ="No Aprobado";
+            if(isset($request['estado'])){
+              $estado =$request['estado'];
+            }
          Vacacione::create([
            'idempleado'=>$request['idempleado'],
            'documento'=>$request['documento'],
@@ -208,11 +215,11 @@ return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correcta
            "remunerada"=>$request['remunerada'],
            'id_establecimiento'=>$user->id_establecimiento,
            'forma'=>$request['forma'],
-           'estado'=>$request['estado'],
+           'estado'=>$estado,
            'documento_cargar'=>$storage_name
         ]);
 
-         if($sede){
+         if($request['sede']){
    return redirect('/All_Vacacione/Sede')->with('status', "Elemento Creado Correctamente");
             }else{
    return redirect('/All_Vacacione')->with('status', "Elemento Creado Correctamente");
@@ -277,10 +284,10 @@ return redirect('/All_Vacacione')->with('status', "Elemento Actualizado Correcta
     }
 
 
- public function delete_Vacacione($id)
+ public function delete_Vacacione(Request $request, $id)
     {
       Vacacione::destroy($id);
-      if($sede){
+      if($request['sede']){
 return redirect('/All_Vacacione/Sede')->with('status', "Elemento Eliminado Correctamente");
             }else{
 return redirect('/All_Vacacione')->with('status', "Elemento Eliminado Correctamente");

@@ -372,13 +372,23 @@
 
                         </div>
 
-
+                          @if($user->roleid == 1 || $user->roleid == 2 )
                         <label id='milabel' for='precio_des' class='col-md-5 control-label'>Precio</label>
 
                         <div class='col-md-4'>
-                            <input id='precio_des' disabled  type='text' class='form-control' name='precio_des'>
+                            <input id='precio_des' type='text' class='form-control' name='precio_des'>
 
                         </div>
+                        @else
+
+                        <label style="display: none;" id='milabel' for='precio_des' class='col-md-5 control-label'>Precio</label>
+
+                        <div style="display: none;" class='col-md-4'>
+                            <input id='precio_des' type='text' class='form-control' name='precio_des'>
+
+                        </div>
+
+                        @endif
 
                         <label id='milabel' for='cantidad_des' class='col-md-5 control-label'>Cantidad</label>
 
@@ -391,7 +401,7 @@
                         <label id='milabel' for='descuento_des' class='col-md-5 control-label'>Descuento</label>
 
                         <div class='col-md-4'>
-                            <input id='descuento_des' min="0"  type='number' class='form-control' name='descuento_des'>
+                            <input id='descuento_des' disabled min="0"  type='number' class='form-control' name='descuento_des'>
 
                         </div>
 
@@ -580,12 +590,17 @@
                 }
                 var descuento_redondeado = parseFloat($("input#descuento_des").val()).toFixed(2);
                 var precio = $("input#precio_des").val();
+
+                var nuevo_val = precio.replace(".","").replace(".","").replace(".","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","").replace(",","");
+                precio =nuevo_val;
+                var precio_format = number_format_coma(precio);
             var total_final =number_format_coma(($("input#cantidad_des").val() * parseFloat(precio.replace(",","")))- ($("input#cantidad_des").val() *  parseFloat(precio.replace(",","")) * (descuento_redondeado/100)),2);
 
 
 
 
                 $("tr#"+$("input#codigo_des").val()+">td#cantidad").text( $("input#cantidad_des").val());
+                $("tr#"+$("input#codigo_des").val()+">td#precio_prod").text(precio_format);
                 $("tr#"+$("input#codigo_des").val()+">td#descuento_aplicado").text(descuento_redondeado +"%").attr("data-descuento",(descuento_redondeado));
                 $("tr#"+$("input#codigo_des").val()+">td#total>div>div#total_val").text( total_final);
                 $("tr#"+$("input#codigo_des").val()+">td#total").attr("data-descuento", descuento_redondeado);
@@ -754,6 +769,11 @@
                 }
 
 
+
+                
+
+                
+
                 $("#tabla_caja>tbody").append("<tr  data-tipo_pago='"+tipo_pago+"' id='"+caja+tipo_pago+"' data-caja ='"+caja+"'><td data-caja ='"+caja+"'>"+caja_text+"</td><td data-tipo_pago ='"+tipo_pago+"'>"+tipo_pago_text+" </td><td id='dinero_asig_caja' data-dinero='"+dinero+"'>"+number_format_coma(dinero)+"</td><td id='porciento_caja'>"+porciento+"%</td>" +
 
                     "<td>" +
@@ -771,6 +791,26 @@
                 $("#dinero_caja").val(number_format_coma(diferencia));
 
 
+            });
+
+  $("#precio_des").on({
+                "focus": function (event) {
+                    $(event.target).select();
+                },
+                "focusout": function (event) {
+                    $(event.target).val(function (index, value ) {
+                        return value.replace(/\D/g, "")
+                                    .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                                    .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                    });
+                },
+                "keyup": function (event) {
+                    $(event.target).val(function (index, value ) {
+                        return value.replace(/\D/g, "")
+                                    .replace(/([0-9])([0-9]{3})$/, '$1.$2')
+                                    .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                    });
+                }
             });
 
             $("#guardar_factura").on("click", function (e) {
@@ -919,7 +959,7 @@
 
 
             $("#cedula").keypress(function(e) {
-                e.preventDefault();
+                //e.preventDefault();
                 var cedula = $("#cedula").val();
                 if(e.which == 13) {
 
@@ -961,6 +1001,7 @@
                            var agregar = "<table> <tr class='row'><td class='col-md-3'> Nombre: </td><td    class='col-md-9'>"+datos_cliente["firts_name"]+" " + datos_cliente["last_name"]+"</td></tr>";
                             agregar += "<tr class='row'><td class='col-md-3'> Celular: </td><td   class='col-md-9'>"+datos_cliente["celular_1"] + "   "+ datos_cliente["celular_2"]+"</td></tr>";
                             agregar +="<tr class='row'><td class='col-md-3'>Direccion: </td><td  class='col-md-9'>"+datos_cliente["direccion"] + " - "+ datos_cliente["municipio"]+"</td></tr>";
+                            agregar +="<tr class='row'><td class='col-md-3'>Cupo del cliente: </td><td  class='col-md-9'>"+ number_format_coma(datos_cliente["cupo"]) +"</td></tr>";
                             agregar +="</table>";
                             agregar +="<input type='hidden' name='id_cliente' id='id_cliente' value='"+datos_cliente["id"] +"'>";
                             $("#descripcion_cliente").append(agregar);

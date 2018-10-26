@@ -103,7 +103,12 @@
                             <td>@if($Incapacidade->idtipoenfermedad) {{ $Incapacidade->TipoMotivo->nombre}} @endif</td>
                             <td>{{$Incapacidade->estado}}</td>
                             <td style="text-align: center;"><a title="Ver Elemento" href="{{route('formulario_Incapacidade',['id'=>$Incapacidade->id, 'ruta'=>'ver'])}}" class="btn btn-xs btn-success"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-                            <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Incapacidade',['id'=>$Incapacidade->id, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
+                            @if($sede)
+                                        <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Incapacidade',['id'=>$Incapacidade->id, 'ruta'=>'actualizar','sede'=>'Sede'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                        @else
+                                        <td style="text-align: center;"><a title="Editar Elemento" href="{{route('formulario_Incapacidade',['id'=>$Incapacidade->id, 'ruta'=>'actualizar'])}}" class="btn btn-xs btn-info"><i class="glyphicon glyphicon-edit"></i></a></td>
+                                        @endif
+                            
                             <td style="text-align: center;">
                                 <form action="{{route('delete_Incapacidade',['id'=>$Incapacidade->id])}}" method="POST">
                                    {{-- method_field('DELETE') --}} {{ csrf_field() }}

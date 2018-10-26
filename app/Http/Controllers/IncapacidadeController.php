@@ -312,7 +312,10 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            $elemento1->fecha_hasta=$request['fecha_hasta'];
            $elemento1->idtipoenfermedad=$request['idtipoenfermedad'];
            $elemento1->idtipomotivo=$request['idtipomotivo'];
-           $elemento1->estado=$request['estado'];
+           if(isset($request['estado'])){
+             $elemento1->estado=$request['estado'];
+           }
+          
 
            //$elemento1->id_establecimiento=>$user->id_establecimiento;
            if($request["documento_incapacidad"]){
@@ -346,6 +349,10 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
        	if($request["documento_incapacidad"]){
            	$storage_name =Storage::disk('public_incapacidades')->put('/', $request["documento_incapacidad"]);
            }
+           $estado ="No Aprobado";
+            if(isset($request['estado'])){
+              $estado =$request['estado'];
+            }
          Incapacidade::create([
            'idempleado'=>$request['idempleado'],
            'documento'=>$request['documento'],
@@ -353,7 +360,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
            'fecha_desde'=>$request['fecha_desde'],
            'fecha_hasta'=>$request['fecha_hasta'],
            'idtipoenfermedad'=>$request['idtipoenfermedad'],
-           'estado'=>$request['estado'],
+           'estado'=>$estado,
            'id_establecimiento'=>$user->id_establecimiento,
            'documento_incapacidad'=>$storage_name,
            "idtipomotivo"=>$request['idtipomotivo']

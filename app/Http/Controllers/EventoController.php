@@ -223,7 +223,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
 
          for($x=0; $x<6; $x=$x+1){
             if($request['idempleado_'.$x]){
-                EventoEmpleado::create(['idevento'=>$evento->id,
+                EventoEmpleado::create(['idevento'=>$evento->idevento,
                 'idempleado'=>$request['idempleado_'.$x]]);
             }
           }
@@ -295,7 +295,7 @@ if(isset($request["busquedad"])==true && $request["nombre_campo"]=="nombres"){
     }
 
 
- public function delete_Evento($id)
+ public function delete_Evento(Request $request, $id)
     {
       Evento::destroy($id);
 
