@@ -112,6 +112,9 @@ class MisArticuloController extends Controller
           $elemento1->valor_pormayor =$request["valor_pormayor"];
           $elemento1->valor_total =$request["valor_total"];
           $elemento1->inicial =$request["inicial"];
+          $elemento1->precio1 =$request["precio1"];
+          $elemento1->precio2 =$request["precio2"];
+          $elemento1->precio3 =$request["precio3"];
           $elemento1->utilidad =$request["utilidad"];
            $elemento1->id_establecimiento=$user->id_establecimiento;
           $elemento1->save();
@@ -126,6 +129,9 @@ class MisArticuloController extends Controller
                         "descripcion"=>"Producto de Empresa",
                         "precio_costo"=>$request["valor_costo"],
                         "precio_venta"=>$request["valor_venta"],
+                        "precio1"=>$request["precio1"],
+                        "precio2"=>$request["precio2"],
+                        "precio3"=>$request["precio3"],
                         "estado_iva"=>"Activo",
                         "sucursale_id"=>1,
                         "empresa_id"=>1,
@@ -171,6 +177,10 @@ class MisArticuloController extends Controller
        			 'valor_iva'=>$request["valor_iva"],
        			 'valor_descuento'=>$request["valor_descuento"],
        			  'id_medida'=>$request["id_medida"],
+              'precio1'=>$request["precio1"],
+              'precio2'=>$request["precio2"],
+              'precio3'=>$request["precio3"],
+
        			   'valor_pormayor'=>$request["valor_pormayor"],
                "tipo"=>2,
                "inicial"=>$request["inicial"],
@@ -188,6 +198,10 @@ class MisArticuloController extends Controller
                         "descripcion"=>"Producto de Empresa",
                         "precio_costo"=>$request["valor_costo"],
                         "precio_venta"=>$request["valor_venta"],
+                        "precio1"=>$request["precio1"],
+                        "precio2"=>$request["precio2"],
+                        "precio3"=>$request["precio3"],
+
                         "estado_iva"=>"Activo",
                         "sucursale_id"=>1,
                         "empresa_id"=>1,
@@ -238,11 +252,14 @@ class MisArticuloController extends Controller
           $elemento1->valor_iva ="";
           $elemento1->valor_descuento ="";
           $elemento1->id_medida ="";
-          $elemento1->valor_pormayor ="";
+          $elemento1->valor_pormayor =1;
           $elemento1->id_establecimiento ="";
           $elemento1->valor_total ="";
           $elemento1->utilidad ="";
           $elemento1->tipo ="";
+          $elemento1->precio1 ="";
+          $elemento1->precio2 ="";
+          $elemento1->precio3 ="";
           $elemento1->inicial ="";
           
           $elemento = $elemento1;

@@ -103,6 +103,10 @@
                             <td style="text-align: center;">
                                 <form action="{{route('delete_Licencia',['id'=>$Licencia->id])}}" method="POST">
                                    {{-- method_field('DELETE') --}} {{ csrf_field() }}
+                                    @if($sede)
+                                        <input type="hidden" name="sede" value="{{$sede}}" >
+                                        @else
+                                        @endif
                                     <input title="Eliminar Elemento" onclick="return confirm('Desea Eliminar el Registro?')" type="submit"  class="glyphicon glyphicon-trash btn btn-xs btn-danger" name="Eliminar" value="Eliminar"></form>
                                 </td>
                             </tr>

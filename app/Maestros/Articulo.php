@@ -19,7 +19,8 @@ class Articulo extends Model
       'updatedDtm', 'updatedby', 'porcentaje_iva',
        'porcentaje_descuento', 'valor_iva', 
        'valor_descuento', 'id_medida', 'valor_pormayor',"utilidad",
-       "valor_total","tipo","id_establecimiento","codigo","inicial"
+       "valor_total","tipo","id_establecimiento","codigo","inicial",
+       "precio1","precio2", "precio3"
     ];
 
 

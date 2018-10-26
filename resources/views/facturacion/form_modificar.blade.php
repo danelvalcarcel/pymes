@@ -76,6 +76,59 @@
 
                         </div>
 
+                                     <div class="row">
+                            
+
+                                              <div class="modal-body">
+                                               <div class="row " style=" border-radius: 5px; padding-bottom: 10px; padding-top: 10px">
+                                                   <div class="form-group">
+                                                         <div class="col-md-2">
+                                                          <label style="color: #fff !important">Buscar Productos</label>
+                                                       </div>
+                                                       <div class="col-md-6">
+                                                                <input title="producto" type="text"  name="producto" value="" id="producto" class="form-control">
+
+                                                       </div>
+                                                       <div class="col-md-4">
+                                                               <div class="form-group">
+                                                                <label  style="color: #fff !important;" id="milabel" for="tipo_precio" class="col-md-5 control-label">Tipo de Precio</label>
+                                                                <div class="col-md-7">
+                                                                    <select id="tipo_precio" class="form-control" name="tipo_precio" required >
+                                                                        <option value="1">Precio Publico</option>
+                                                                        <option value="2">Precio Distribuidor</option>
+                                                                        <option value="3">Precio Especial</option>
+                                                                        
+                                                                    </select>
+                                                                </div>
+
+                                                            </div>
+
+                                                       </div>
+                                                    
+                                                   </div>
+
+
+                                               </div>
+
+                                                <div class="row" style="margin-top: 4px">
+                                                    <div  id="cont_prod_busc">
+                                                        <div class="row" id="cont_prod_busc_row">
+
+                                                                    <table  class=" col-md-12 table table-bordered  table-striped">
+
+
+
+                                                                    </table>
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+
 
 
 
@@ -596,6 +649,17 @@
             </div>
         </div>
     </div>
+        <style type="text/css" media="screen">
+    #cont_prod_busc a, #cont_prod_busc p, #cont_prod_busc td, #cont_prod_busc tr,
+    #cont_prod_busc h4, #cont_prod_busc h3, #cont_prod_busc h5, #cont_prod_busc strong{
+        color:#000 !important;
+        background: #fff;
+        padding: 0;
+    }    
+    #cont_prod_busc table tr td:nth-child(3),#cont_prod_busc table tr td:nth-child(1){
+        display: none;
+    }
+    </style>
 @endsection
 @section("script")
     <script>
@@ -606,7 +670,7 @@
                 $.ajax({
                     type:"Get",
                     dataType:"json",
-                    url:"/Clientes"+"/"+ cedula+"/"+"{{ Auth::user()->id_establecimiento}}",
+                    url:"{{url('/')}}/Clientes"+"/"+ cedula+"/"+"{{ Auth::user()->id_establecimiento}}",
                     success: function(resp){
                         console.log(resp.length);
                         if(resp.length===0){
@@ -644,6 +708,7 @@
                         $("#descripcion_cliente").append(agregar);
                         $("#cont_desc_cliente").slideDown(500);
                         $("#text_area_descri").slideDown(500);
+                        $("#tipo_precio").val(datos_cliente["tipo_cliente_id"])
 
 
                     }});
@@ -1119,6 +1184,7 @@
                             $("#descripcion_cliente").append(agregar);
                             $("#cont_desc_cliente").slideDown(500);
                             $("#text_area_descri").slideDown(500);
+                            $("#tipo_precio").val(datos_cliente["tipo_cliente_id"])
 
 
                         }});
@@ -1152,16 +1218,19 @@
                     $("#cont_prod_busc_row >table").empty();
                     return;
                 }
+                 var tipo_precio= $("#tipo_precio").val();
+                 var tipo_precio_2= $("#tipo_precio").val();
                 $.ajax({
-                    type:"Get",
+                    type:"Post",
                     dataType:"json",
-                    url:"/Productos/"+nombre+"/ajax_prod",
+                    data:{tipo_precio:tipo_precio},
+                    url:"{{url('/')}}/Productos/"+nombre+"/ajax_prod",
                     success: function(resp){
                          lista_prod=[];
                          lista_prod_id=[];
-                         console.log(resp);
+                        // console.log(resp);
                         var m=resp.length;
-                        console.log(m);
+                        //console.log(m);
 
                             $("#cont_prod_busc_row >table").empty();
 
@@ -1182,20 +1251,20 @@
                                 var detalle_prod = resp[t];
                                 var inventario= detalle_prod["inventario"];
                                 var bodega_prod = inventario["bodega"];
-                                console.log(inventario["codigo"]);
+                               /* console.log(inventario["codigo"]);
                                 console.log(inventario["cantidad"]);
-                                console.log(detalle_prod["precio_venta"]);
+                                console.log(detalle_prod["precio_venta"]);*/
                                 var fondo_color="";
                                 var fondo="";
                                 var lenght_inventario = inventario.length;
-                                console.log(lenght_inventario);
+                                //console.log(lenght_inventario);
                                 if(lenght_inventario>1){
                                     var w;
                                     var cantidad ="";
 
                                     for( w=0; w<lenght_inventario; w=w+1) {
                                             var inventario_2 =inventario[w];
-                                            console.log(inventario_2);
+                                            //console.log(inventario_2);
                                              bodega_prod = inventario_2["bodega"];
 
                                         fondo="";
@@ -1206,6 +1275,7 @@
                                                 fondo_color="#dff0d8";
                                             cantidad=$("table#factura_deta>tbody>tr#"+inventario_2["codigo"]+">td#cantidad").text();
                                             }
+
 
                                                     $(" #cont_prod_busc_row table").append("<tr id='content_"+inventario_2["codigo"]+"'  class='"+fondo+"'><div   class='col-md-12 ' >"+
                                                         //"<img class='col-md-12' height='150px' src='img/bombillo.jpg'>"+
@@ -1265,6 +1335,19 @@
                                         fondo_color="#dff0d8";
                                         cantidad=$("table#factura_deta>tbody>tr#"+inventario["codigo"]+">td#cantidad").text();
                                     }
+
+                                            if(tipo_precio_2==="1"){
+                                                    detalle_prod["precio_venta"] =detalle_prod["precio1"];
+                                            }else if(tipo_precio_2==="2"){
+
+                                          
+                                                detalle_prod["precio_venta"] =detalle_prod["precio2"];
+                                                  //  console.log(detalle_prod["precio_venta"]+"++"+ detalle_prod["precio2"])
+                                            }else if(tipo_precio_2==="3"){
+                                                detalle_prod["precio_venta"] =detalle_prod["precio3"];
+                                            }else{
+
+                                            }
                                     $(" #cont_prod_busc_row table").append("<tr id='content_"+inventario["codigo"]+"'    data-id_inv='"+inventario["id"]+"' class='"+fondo+"'><div   class='col-md-12 ' >"+
                                         //"<img class='col-md-12' height='150px' src='img/bombillo.jpg'>"+
                                         //"<div class='col-m-4' style='text-align: center'>"+

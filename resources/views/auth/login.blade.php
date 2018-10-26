@@ -63,8 +63,8 @@
 
                         <div class="form-group">
                             <div class="col-sm-8 col-sm-offset-2">
-                                <button  type="submit" class="btn  form-control" style="background: #e74c3c; color:#fff">
-                                    Post <i class="fa fa-sign-in"></i></button>
+                                <a   class="btn  form-control" href="https://www.sintecpos.com/demo" style="background: #e74c3c; color:#fff">
+                                    Post <i class="fa fa-sign-in"></i></a>
                                 </button>
 
                                 <button   type="submit" class="btn  form-control" style="background: #e74c3c; color:#fff; margin-top: 15px">

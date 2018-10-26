@@ -22,7 +22,7 @@ class ArticuloController extends Controller
    
 
 
-
+    protected $precios = ["Precio Publico", "Precio Distribuidor", "Precio Especial"];
 
      protected $nombre_modulo = "Maestros";
 
@@ -77,6 +77,9 @@ class ArticuloController extends Controller
           $elemento1->valor_pormayor =$request["valor_pormayor"];
           $elemento1->valor_total =$request["valor_total"];
           $elemento1->utilidad =$request["utilidad"];
+          $elemento1->precio1 =$request["precio1"];
+          $elemento1->precio2 =$request["precio2"];
+          $elemento1->precio3 =$request["precio3"];
            $elemento1->id_establecimiento=$user->id_establecimiento;
            
  			
@@ -114,6 +117,9 @@ class ArticuloController extends Controller
        			 'valor_iva'=>$request["valor_iva"],
        			 'valor_descuento'=>$request["valor_descuento"],
        			  'id_medida'=>$request["id_medida"],
+              'precio1'=>$request["precio1"],
+              'precio2'=>$request["precio2"],
+              'precio3'=>$request["precio3"],
        			   'valor_pormayor'=>$request["valor_pormayor"],
                "tipo"=>1,
                "utilidad"=>$request["utilidad"],
@@ -159,11 +165,16 @@ class ArticuloController extends Controller
           $elemento1->valor_iva ="";
           $elemento1->valor_descuento ="";
           $elemento1->id_medida ="";
-          $elemento1->valor_pormayor ="";
+          $elemento1->valor_pormayor =1;
           $elemento1->id_establecimiento ="";
           $elemento1->valor_total ="";
           $elemento1->utilidad ="";
+           $elemento1->precio1 ="";
+            $elemento1->precio2 ="";
+             $elemento1->precio3 ="";
+          
           $elemento = $elemento1;
+
         }else{
            $ruta ="All_Articulo";
            $estilo="none";

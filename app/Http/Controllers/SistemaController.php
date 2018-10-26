@@ -14,12 +14,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 class SistemaController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     protected $nombre_modulo = "Maestros";
+    
 
       public function login_auth(Request $request)
     {
@@ -214,7 +217,7 @@ class SistemaController extends Controller
            $user = User::find(Auth::user()->id_usuario);
            $user->fecha_registro = $request["fecha"];
            $user->save();
-           return ["message"=>"OK"];
+           return ["message"=>"OK","fecha"=> date("d M Y",strtotime($user->fecha_registro))];
       
     }
 

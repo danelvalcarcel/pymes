@@ -243,13 +243,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group {{ $errors->has('tipo_cliente') ? ' has-error' : '' }}">
-                                    <label  id="milabel" for="tipo_cliente_id" class="col-md-5 control-label">Tipo de Cliente</label>
+                                    <label  id="milabel" for="tipo_cliente_id" class="col-md-5 control-label">Tipo de Precio</label>
                                     <div class="col-md-7">
                                         <select id="tipo_cliente_id" class="form-control" name="tipo_cliente_id" required >
-                                            <option value="1">Cliente</option>
-                                            <option value="2">Cliente Provedor</option>
-                                            <option value="3">Cliente Operador</option>
-                                            <option value="4">Cliente Super Admin</option>
+                                            <option value="1">Precio Publico</option>
+                                            <option value="2">Precio Distribuidor</option>
+                                            <option value="3">Precio Especial</option>
+                                            
                                         </select>
                                     </div>
 

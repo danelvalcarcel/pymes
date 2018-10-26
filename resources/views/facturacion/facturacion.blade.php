@@ -75,10 +75,10 @@
 
                         </div>
 
-                        <div class="row">
+             <div class="row">
                             
 
-                                            <div class="modal-body">
+                  <div class="modal-body">
                    <div class="row " style=" border-radius: 5px; padding-bottom: 10px; padding-top: 10px">
                        <div class="form-group">
                              <div class="col-md-2">
@@ -86,6 +86,21 @@
                            </div>
                            <div class="col-md-6">
                                     <input title="producto" type="text"  name="producto" value="" id="producto" class="form-control">
+
+                           </div>
+                           <div class="col-md-4">
+                                   <div class="form-group">
+                                    <label  style="color: #fff !important;" id="milabel" for="tipo_precio" class="col-md-5 control-label">Tipo de Precio</label>
+                                    <div class="col-md-7">
+                                        <select id="tipo_precio" class="form-control" name="tipo_precio" required >
+                                            <option value="1">Precio Publico</option>
+                                            <option value="2">Precio Distribuidor</option>
+                                            <option value="3">Precio Especial</option>
+                                            
+                                        </select>
+                                    </div>
+
+                                </div>
 
                            </div>
                         
@@ -111,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-                        </div>
+            </div>
 
 
 
@@ -923,6 +938,7 @@
                                     $("#contenido_registrar_cliente").slideDown(500);
                                     $("#cont_desc_cliente").slideUp(500);
                                     $("#text_area_descri").slideUp(500);
+
                                     return
                                 }
                                 $("#pestanas_facturacion").append("<li id='pestana_register' style='font-weight: bolder' data-div='contenido_registrar_cliente' data-no_div='contenido_facturacion' class='active'><a  >Creacion Cliente <span data-id='pestana_register' class='glyphicon glyphicon-remove' aria-hidden='true'></span> </a> </li>");
@@ -950,6 +966,7 @@
                             $("#descripcion_cliente").append(agregar);
                             $("#cont_desc_cliente").slideDown(500);
                             $("#text_area_descri").slideDown(500);
+                            $("#tipo_precio").val(datos_cliente["tipo_cliente_id"])
                             $("#producto").focus();
                             //$("#btn_agregar_prod").focus().click();
 
@@ -989,9 +1006,12 @@
                     $("#cont_prod_busc_row >table").empty();
                     return;
                 }
+                var tipo_precio= $("#tipo_precio").val();
+                var tipo_precio_2= $("#tipo_precio").val();
                 $.ajax({
-                    type:"Get",
+                    type:"Post",
                     dataType:"json",
+                    data:{tipo_precio:tipo_precio},
                     url:"{{url('/')}}/Productos"+"/"+ nombre+"/"+"ajax_prod",
                     success: function(resp){
                          lista_prod=[];
@@ -1102,6 +1122,19 @@
                                         fondo_color="#dff0d8";
                                         cantidad=$("table#factura_deta>tbody>tr#"+inventario["codigo"]+">td#cantidad").text();
                                     }
+
+                                           if(tipo_precio_2==="1"){
+                                                    detalle_prod["precio_venta"] =detalle_prod["precio1"];
+                                            }else if(tipo_precio_2==="2"){
+
+                                          
+                                                detalle_prod["precio_venta"] =detalle_prod["precio2"];
+                                                  //  console.log(detalle_prod["precio_venta"]+"++"+ detalle_prod["precio2"])
+                                            }else if(tipo_precio_2==="3"){
+                                                detalle_prod["precio_venta"] =detalle_prod["precio3"];
+                                            }else{
+
+                                            }
                                     $(" #cont_prod_busc_row table").append("<tr id='content_"+inventario["codigo"]+"'    data-id_inv='"+inventario["id"]+"' class='"+fondo+"'><div   class='col-md-12 ' >"+
                                         //"<img class='col-md-12' height='150px' src='img/bombillo.jpg'>"+
                                         //"<div class='col-m-4' style='text-align: center'>"+

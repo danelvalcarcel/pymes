@@ -47,7 +47,7 @@ Route::resource('User','UserController');
 Route::get('Cliente2',"ClienteController@index2")->name("Cliente2.index2");
 
 Route::resource('Productos','ProductosController');
-Route::get('Productos/{nomb_prod}/ajax_prod', 'ProductosController@show_comple_prod')->name("ajax_prod");
+Route::post('Productos/{nomb_prod}/ajax_prod', 'ProductosController@show_comple_prod')->name("ajax_prod");
 
 
 

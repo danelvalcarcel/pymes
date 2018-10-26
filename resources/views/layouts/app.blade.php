@@ -133,11 +133,12 @@ input, select, option{
                             </ul>
                         </li>
                          <li style="color:#fff; border: none; padding-right: 4px">
-                            <input style=" display: inline-block; width: 140px; border:none; background: none; color:#fff !important; padding: 0; margin: 0;" type="date" id="fecha_registro" name="fecha_registro" value="{{$user->fecha_registro}}" placeholder="">
+                            
                            
                          </li>
-                         <li id="hora" style="color: #fff !important;">
-                            00:00:00
+                         <li >
+                            <a id="fecha_sistema" style="font-size: 17px; display: inline-block; background: none; text-decoration: none;"><?php echo date("d M Y", strtotime($user->fecha_registro)) ?></a>
+                           <strog id="hora" style="color: #fff !important; display: inline-block;"> 00:00:00</strog>
                              
                          </li>
                         
@@ -189,7 +190,7 @@ input, select, option{
                                     </a>
                                 </li>
                                 <li style="padding-left: 3px; color:#000" >
-                                    <?php echo  date("Y-m-d") ?>
+                                  <a  id="cambiar_fecha">Cambiar Fecha</a>
                                 </li>
 
                                 <li class="divider"></li>
@@ -219,7 +220,7 @@ input, select, option{
          <footer class="footer">
         <div class="footer-inner">
             <div class="footer-content">
-               <p class="text-left">Powered by  www.sintecpos.com</p>
+               <p class="text-left">Powered by  <a href="https://www.sintecpos.com/">www.sintecpos.com</a></p>
             </div>
         </div>
     </footer> 
@@ -248,6 +249,41 @@ input, select, option{
         </div>
     </div>
     
+
+
+            <div class="modal fade" id="inforModal2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content ">
+                <div class="modal-header " style="padding-bottom: 0; padding-top: 10px">
+                    <h4 class="modal-title" style="text-align: center"><strong>
+                            Cambio de Fecha
+                        </strong></h4>
+                    <button type="button" id="cerrar_info"    class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body  " style="padding-top: 0">
+                    <div class="row">
+                        <div class="col-sm-4">
+                         <label for="">Fecha de Usuario</label>
+                         
+                        </div>
+                        <div class="col-sm-4">
+                      <input class="form-control" style=" display: inline-block;  border:none; background: none; color:#000 !important; padding: 0; margin: 0;" type="date" id="fecha_registro" name="fecha_registro" value="{{$user->fecha_registro}}" placeholder="">      
+                        </div>
+                        <div class="col-sm-12" style="text-align: center;">
+                            <input type="button" class="btn btn-success col-sm-6 col-sm-offset-3" id="cambiar_fecha_boton" name="Guardar" value="Cambiar" placeholder="">
+                        </div>
+                    </div>
+
+                      
+                    
+                    <div class="col-md-6 col-md-offset-3" id="estado_operacion" ></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- Scripts -->
 
     
@@ -281,9 +317,12 @@ input, select, option{
                                 });
 
 
+                            $("#cambiar_fecha").on("click", function(){
+                                $("#inforModal2").modal();
+                            });
+                $("#cambiar_fecha_boton").on("click", function(){
 
-                $("#fecha_registro").on("change", function(){
-                var fecha = $(this).val();
+                var fecha = $("#fecha_registro").val();
                                     $.ajax({
                     type:"Post",
                     dataType:"json",
@@ -291,13 +330,14 @@ input, select, option{
                     url:"{{route('Cambiar_Fecha')}}",
                     success: function(resp){
                         if(resp["message"]==="OK"){
+                            $("#fecha_sistema").text(resp["fecha"]);
                             $("#inforModal .modal-header").addClass("bg-success");
                             $("#inforModal .modal-body").addClass("bg-success");
                             $("#inforModal .modal-header").removeClass("bg-danger");
                             $("#inforModal .modal-body").removeClass("bg-danger");
                              $("p#infor_mostrar").empty();
                             $("p#infor_mostrar").text("Fecha Actualizada Correctamente");
-                            $("#inforModal").modal();
+                            $("#inforModal").modal().appendTo('#inforModal2');
                         }else{
                             $("#inforModal .modal-header").removeClass("bg-success");
                             $("#inforModal .modal-body").removeClass("bg-success");
@@ -306,8 +346,8 @@ input, select, option{
                              
                              $("p#infor_mostrar").empty();
                             $("p#infor_mostrar").text("Se ha presentado un error");
-                            $("#inforModal").modal();
-                            $(this).val("");
+                            $("#inforModal").modal().appendTo('#inforModal2');
+                            $("#fecha_registro").val("");
                         }
                     },
                         error:function(){
@@ -318,8 +358,8 @@ input, select, option{
                              
                              $("p#infor_mostrar").empty();
                             $("p#infor_mostrar").text("Se ha presentado un error");
-                            $("#inforModal").modal();
-                            $(this).val("");
+                            $("#inforModal").modal().appendTo('#inforModal2');
+                            $("#fecha_registro").val("");
                         }
 
                             

@@ -14,7 +14,8 @@ class Incapacidade extends Model
     public $timestamps = false;
     protected $fillable = [
       'idempleado', 'documento', 'fecha', 'fecha_desde', "estado",
-      'fecha_hasta', 'idtipoenfermedad', 'id_establecimiento',"documento_incapacidad","idtipomotivo"
+      'fecha_hasta', 'idtipoenfermedad', 'id_establecimiento',
+      "documento_incapacidad","idtipomotivo"
     ];
 
      public function empleado()
